@@ -1,16 +1,7 @@
 # ENSE-405-Community_car_pool
 mobile application that lets high school and post secondary studens share ride to school. 
-this application is intened with the hope of reducing emssion to support goal 13 of [sustainable Development](https://www.un.org/sustainabledevelopment/climate-change/) mobile application that lets high school and post secondary studens share ride to school. this application is intened with the hope of reducing emssion to support goal 13 of Un's goals
+this application is intened with the hope of reducing emssion to support goal 13 of UN's [sustainable Development](https://www.un.org/sustainabledevelopment/climate-change/) mobile application that lets high school and post secondary studens share ride to school. this application is intened with the hope of reducing emssion to support goal 13 of Un's goals
 
-## Getting Started
+## License 
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/)
