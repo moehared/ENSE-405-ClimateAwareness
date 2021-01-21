@@ -3,8 +3,8 @@ mobile application that lets high school and post secondary studens share ride t
 this application is intened with the hope of reducing emssion to support goal 13 of UN's [sustainable Development](https://www.un.org/sustainabledevelopment/climate-change/) mobile application that lets high school and post secondary studens share ride to school. this application is intened with the hope of reducing emssion to support goal 13 of sustainable development goals
 
 
-# Project Diverables
-1: [Documentation](Community research & understanding)
+## Project Diverables
+1: [Community research & understanding](https://github.com/moehared/ENSE-405-Community_car_pool/tree/main/Documentation/Community%20research%20%26%20understanding)
 
 
 ## License 
