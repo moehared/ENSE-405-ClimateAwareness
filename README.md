@@ -1,4 +1,4 @@
-# ENSE-405-Car_Pool
+# ENSE-405-climate_chnage
 mobile application that lets highschool and post-secondary studens share ride to school. 
 this application is intened with the hope of reducing emssion (C02) to support goal 13 of UN's [sustainable Development](https://www.un.org/sustainabledevelopment/climate-change/) goal. so students who are neighbours or are within  1km radiaus can carpool to school. 
 
