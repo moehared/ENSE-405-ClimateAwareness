@@ -1,4 +1,4 @@
-# car_pool_app
+# app
 
 A new Flutter project.
 
