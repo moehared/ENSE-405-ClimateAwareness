@@ -1,6 +1,6 @@
 # ENSE-405-climate_chnage
 mobile application that lets highschool and post-secondary studens and everyone else educate about climate change. 
-this application is intened with the hope of reducing carbon footprint to support goal 13 of UN's [sustainable Development](https://www.un.org/sustainabledevelopment/climate-change/) goal. so students who are neighbours or are within  1km radiaus can carpool to school. 
+this application is intened with the hope of reducing carbon footprint to support goal 13 of UN's [sustainable Development](https://www.un.org/sustainabledevelopment/climate-change/) goal.
 
 
 ## Project Diverables
