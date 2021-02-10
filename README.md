@@ -11,8 +11,14 @@ this application is intened with the hope of reducing carbon footprint to suppor
 
 
 2: [Emerging Picture & Project managment](https://github.com/moehared/ENSE-405-ClimateAwareness/tree/main/Documentation/Emerging%20Picture%20%26%20Project%20managment) <br />
-3: [software design](https://github.com/moehared/ENSE-405-Community_car_pool/tree/main/Documentation/software%20design) <br />
-4: [Project execution](https://github.com/moehared/ENSE-405-ClimateAwareness/tree/main/app) <br />
+* [Business Case](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Emerging%20Picture%20%26%20Project%20managment/Ch%202%20-%20Business%20Case%20Template.pdf) <br />
+* [Stakeholder Analysis](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Emerging%20Picture%20%26%20Project%20managment/Ch%203%20-%20Stakeholder%20Analysis%20Template.pdf) <br />
+* [Project Requirement](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Emerging%20Picture%20%26%20Project%20managment/Ch%204%20-%20Project%20Requirements%20Template.pdf) <br />
+* [Project Scope](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Emerging%20Picture%20%26%20Project%20managment/Ch%204%20-%20Project%20Scope%20Statement%20Template.pdf) <br />
+* [Emerging picture](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Emerging%20Picture%20%26%20Project%20managment/P04%20-%20405%20-%20Activity%20-%20Drafting%20an%20emerging%20picture2.pdf) <br />
+* [Project managment tool](https://app.milanote.com/1L9AdB1wp5gp4W/climate-awareness?p=MSoK3mXVPyX)
+
+
 
 
 ## License 
