@@ -6,7 +6,7 @@ this application is intened with the hope of reducing carbon footprint to suppor
 1: [Community research & understanding](https://github.com/moehared/ENSE-405-Community_car_pool/tree/main/Documentation/Community%20research%20%26%20understanding) <br />
 * [Technology Steward](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Community%20research%20%26%20understanding/P01%20-%20405%20-%20Activity%20-%20Technology%20Steward.pdf) <br />
 * [Community characteristics & Orientation](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Community%20research%20%26%20understanding/P02%20-%20405%20-%20Activity%20-%20Community%20characteristics%20%20orientation.pdf) <br />
-* [Technology Configuration] (https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Community%20research%20%26%20understanding/P03%20-%20405%20-%20Activity%20-%20Technology%20configuration%20inventory.pdf)
+* [Technology Configuration](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Community%20research%20%26%20understanding/P03%20-%20405%20-%20Activity%20-%20Technology%20configuration%20inventory.pdf)<br />
 
 
 
