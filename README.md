@@ -16,7 +16,7 @@ this application is intened with the hope of reducing carbon footprint to suppor
 * [Project Requirement](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Emerging%20Picture%20%26%20Project%20managment/Ch%204%20-%20Project%20Requirements%20Template.pdf) <br />
 * [Project Scope](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Emerging%20Picture%20%26%20Project%20managment/Ch%204%20-%20Project%20Scope%20Statement%20Template.pdf) <br />
 * [Emerging picture](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/Emerging%20Picture%20%26%20Project%20managment/P04%20-%20405%20-%20Activity%20-%20Drafting%20an%20emerging%20picture2.pdf) <br />
-* [Project managment tool](https://app.milanote.com/1L9AdB1wp5gp4W/climate-awareness?p=MSoK3mXVPyX)
+* [Project management tool](https://app.milanote.com/1L9AdB1wp5gp4W/climate-awareness?p=MSoK3mXVPyX)
 
 
 
