@@ -21,6 +21,7 @@ this application is intened with the hope of reducing carbon footprint to suppor
 
 3: [Software design](https://github.com/moehared/ENSE-405-ClimateAwareness/tree/main/Documentation/software%20design)
 * [Hifi prototype](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/software%20design/Hi_FI/climateAweraness.pdf)
+* [prototype demo video](https://youtu.be/-y2kiSQnR8s)
 * [UML diagram](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/Documentation/software%20design/UML/ClimateApp.pdf)
 
 
