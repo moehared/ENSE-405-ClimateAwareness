@@ -19,6 +19,12 @@ this application is intened with the hope of reducing carbon footprint to suppor
 * [Project management tool](https://app.milanote.com/1L9AdB1wp5gp4W/climate-awareness?p=MSoK3mXVPyX)
 
 
+3: [Software design]()
+    
+    * [Hifi prototype]()
+    * [UML diagram]()
+
+
 
 
 ## License 
