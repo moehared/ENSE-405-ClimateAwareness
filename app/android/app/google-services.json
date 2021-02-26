@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "92278272634",
+    "project_id": "climate-app-6bace",
+    "storage_bucket": "climate-app-6bace.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92278272634:android:e2490177179b3db8adc1c3",
+        "android_client_info": {
+          "package_name": "com.moehared.climate_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92278272634-5u991rkh1ufn987nrbgvsnkfd2n46avk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI83o7vNMHHeJQ9AP0t9NVgBYOIzhQo2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92278272634-5u991rkh1ufn987nrbgvsnkfd2n46avk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
