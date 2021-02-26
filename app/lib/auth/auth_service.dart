@@ -11,23 +11,34 @@ class AuthService {
     await _firebaseAuth.signOut();
   }
 
-  Future signIn({String email, String password}) async {
+  Future<bool> signIn({String email, String password}) async {
+    var isSignIn = false;
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      final user = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+      if(user != null) {
+        isSignIn = true;
+      }
     } on FirebaseAuthException catch (e) {
+      isSignIn = false;
       print("Error occurred while signing in " + e.message);
     }
 
-    return false;
+    return isSignIn;
   }
 
-  Future signUp({String email, String password}) async {
+  Future<bool> signUp({String email, String password}) async {
+    var isSignUp = false;
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      final user = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: email);
+      if(user != null) {
+        isSignUp = true;
+      }
     } on FirebaseAuthException catch (e) {
-      print("Error occurred while signing in " + e.message);
+      isSignUp = false;
+      print("Error occurred while signing up " + e.message);
     }
+    return isSignUp;
   }
 }
