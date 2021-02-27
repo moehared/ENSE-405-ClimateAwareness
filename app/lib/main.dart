@@ -1,6 +1,8 @@
 import 'package:app/auth/auth_service.dart';
+import 'package:app/route/router.dart' as route;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +13,9 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MyApp());
 }
+
+DatabaseReference userRef =
+    FirebaseDatabase.instance.reference().child('users');
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -29,10 +34,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Color(0xFF512da8),
+          accentColor: Color(0xffc2185b),
+          primaryColorDark: Color(0xff140078),
+          accentIconTheme: IconThemeData(color: Color(0xffc2185b)),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: AuthWrapper(),
+        initialRoute: AuthWrapper.routeName,
+        onGenerateRoute: route.Router.generateRoute,
       ),
     );
   }

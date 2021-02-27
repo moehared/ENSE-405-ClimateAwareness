@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "92278272634",
-    "project_id": "climate-app-6bace",
-    "storage_bucket": "climate-app-6bace.appspot.com"
+    "project_number": "90378797312",
+    "project_id": "climate-awareness-v2",
+    "storage_bucket": "climate-awareness-v2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:92278272634:android:e2490177179b3db8adc1c3",
+        "mobilesdk_app_id": "1:90378797312:android:8d950c685f394c70af73e5",
         "android_client_info": {
-          "package_name": "com.moehared.climate_app"
+          "package_name": "com.moehared.climatev2"
         }
       },
       "oauth_client": [
         {
-          "client_id": "92278272634-5u991rkh1ufn987nrbgvsnkfd2n46avk.apps.googleusercontent.com",
+          "client_id": "90378797312-j2bcr0mkaoutaar3bf1co0mc0j62r97b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCI83o7vNMHHeJQ9AP0t9NVgBYOIzhQo2c"
+          "current_key": "AIzaSyAd0L6t7kne1Xtvg4WU4izIkWrxYa1Bg9k"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "92278272634-5u991rkh1ufn987nrbgvsnkfd2n46avk.apps.googleusercontent.com",
+              "client_id": "90378797312-j2bcr0mkaoutaar3bf1co0mc0j62r97b.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

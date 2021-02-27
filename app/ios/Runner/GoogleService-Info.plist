@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>92278272634-aotslnofenmduhnehr4qqknrhpa6kbao.apps.googleusercontent.com</string>
+	<string>90378797312-264rojah99m7tvmknjscarf56oe3nhfd.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.92278272634-aotslnofenmduhnehr4qqknrhpa6kbao</string>
+	<string>com.googleusercontent.apps.90378797312-264rojah99m7tvmknjscarf56oe3nhfd</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC0uXbyDUrtmQiDwgcKmWeNhf56D-Cdi8c</string>
+	<string>AIzaSyAaXg0b7FDlTXYCvcEPEduFenspEhc3LIQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>92278272634</string>
+	<string>90378797312</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.moehared.climateapp</string>
+	<string>com.moehared.climatev2</string>
 	<key>PROJECT_ID</key>
-	<string>climate-app-6bace</string>
+	<string>climate-awareness-v2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>climate-app-6bace.appspot.com</string>
+	<string>climate-awareness-v2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:92278272634:ios:0acfd5dad76b2a2fadc1c3</string>
+	<string>1:90378797312:ios:b0e41a5f3150e828af73e5</string>
 </dict>
 </plist>

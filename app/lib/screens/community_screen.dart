@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CommunityScreen extends StatelessWidget {
+  static const routeName = '/CommunityScreen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Community"),
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
