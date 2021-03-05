@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFF512da8),
           accentColor: Color(0xffc2185b),
           primaryColorDark: Color(0xff140078),
+          primaryColorLight: Color(0xff8559da),
           accentIconTheme: IconThemeData(color: Color(0xffc2185b)),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),

@@ -29,14 +29,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          brightness: Brightness.light,
-          title: Text(_pages[_selectedPageIndex]['title']),
-          actions: [
-            _pages[_selectedPageIndex]['action'] ?? Container(),
-          ],
-        ),
-        // drawer: MainDrawer(),
         body: _pages[_selectedPageIndex]['page'],
         bottomNavigationBar: BottomNavigationBar(
           unselectedItemColor: Colors.white54,
@@ -63,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             ),
             BottomNavigationBarItem(
               backgroundColor: Theme.of(context).primaryColor,
-              icon: Icon(Icons.forum),
+              icon: Icon(Icons.forum_outlined),
               label: 'Forum post',
             ),
             BottomNavigationBarItem(

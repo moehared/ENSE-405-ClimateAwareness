@@ -5,6 +5,18 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        brightness: Brightness.light,
+        title: Text('Chat'),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.notifications,
+            ),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -1,9 +1,13 @@
+import 'package:app/auth/auth_service.dart';
+import 'package:app/model/user_model.dart';
 import 'package:app/screens/login_screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../constant.dart';
+import 'emailverification_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const routeName = '/SignUpScreen';
@@ -23,6 +27,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   var emailFocus = false;
 
   var _isEmailValid = false;
+
+  var user = UserModel(
+      firstName: "", lastName: "", email: "", password: "", carbonScore: 0.0);
 
   // @override
   // void dispose() {
@@ -75,7 +82,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Column(
                       children: [
                         TextFormField(
-                          onSaved: (val) {},
+                          onSaved: (val) {
+                            user = UserModel(
+                              firstName: val,
+                              lastName: user.firstName,
+                              email: user.email,
+                              password: user.password,
+                              carbonScore: user.carbonScore,
+                            );
+                          },
                           keyboardType: TextInputType.text,
                           textAlign: TextAlign.center,
                           textInputAction: TextInputAction.next,
@@ -102,6 +117,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           keyboardType: TextInputType.text,
                           textAlign: TextAlign.center,
                           textInputAction: TextInputAction.next,
+                          onSaved: (lastName) {
+                            user = UserModel(
+                              firstName: user.firstName,
+                              lastName: lastName,
+                              email: user.email,
+                              password: user.password,
+                              carbonScore: user.carbonScore,
+                            );
+                          },
                           focusNode: _lastNameFocus,
                           onFieldSubmitted: (_) {
                             FocusScope.of(context).requestFocus(_emailFocus);
@@ -136,6 +160,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               return null;
                             }
                           },
+                          onSaved: (email) {
+                            user = UserModel(
+                              firstName: user.firstName,
+                              lastName: user.lastName,
+                              email: email,
+                              password: user.password,
+                              carbonScore: user.carbonScore,
+                            );
+                          },
                           onChanged: (email) {
                             if (!EmailValidator.validate(email)) {
                               setState(() {
@@ -169,6 +202,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             } else {
                               return null;
                             }
+                          },
+                          onSaved: (pass) {
+                            user = UserModel(
+                              firstName: user.firstName,
+                              lastName: user.lastName,
+                              email: user.email,
+                              password: pass,
+                              carbonScore: user.carbonScore,
+                            );
                           },
                           onChanged: (_) {
                             print('value of email focus = ' +
@@ -240,7 +282,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void signUpForm() {
+  void signUpForm() async {
     var isValid = _form.currentState.validate();
     if (!isValid) {
       setState(() {
@@ -254,5 +296,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
     }
     _form.currentState.save();
+    var provider = Provider.of<AuthService>(context, listen: false);
+    bool signUpSuccessful = await provider.signUp(userModel: user);
+
+    if (signUpSuccessful) {
+      provider.sendEmailVerification();
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => ConfirmEmail()),
+        ModalRoute.withName(ConfirmEmail.routeName),
+      );
+    }
   }
 }
