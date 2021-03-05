@@ -28,8 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   var _isEmailValid = false;
 
-  var user = UserModel(
-      firstName: "", lastName: "", email: "", password: "", carbonScore: 0.0);
+  var user = UserModel(firstName: "", lastName: "", email: "", password: "");
 
   // @override
   // void dispose() {
@@ -88,7 +87,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               lastName: user.firstName,
                               email: user.email,
                               password: user.password,
-                              carbonScore: user.carbonScore,
                             );
                           },
                           keyboardType: TextInputType.text,
@@ -123,7 +121,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               lastName: lastName,
                               email: user.email,
                               password: user.password,
-                              carbonScore: user.carbonScore,
                             );
                           },
                           focusNode: _lastNameFocus,
@@ -166,7 +163,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               lastName: user.lastName,
                               email: email,
                               password: user.password,
-                              carbonScore: user.carbonScore,
                             );
                           },
                           onChanged: (email) {
@@ -209,7 +205,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               lastName: user.lastName,
                               email: user.email,
                               password: pass,
-                              carbonScore: user.carbonScore,
                             );
                           },
                           onChanged: (_) {
