@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 class QuestinairesScreen extends StatefulWidget {
   static const String routeName = '/QuestinairesScreen';
+  static const String RESULT = 'CARBON_RESULT';
   @override
   _QuestinairesScreenState createState() => _QuestinairesScreenState();
 }
@@ -168,11 +169,6 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
     //         goodsAndService.c02e) /
     //     1000;
     // print('Results is = $result\n');
-    // Navigator.pushAndRemoveUntil(
-    //   context,
-    //   MaterialPageRoute(builder: (BuildContext context) => HomePage()),
-    //   ModalRoute.withName(HomePage.routeName),
-    // );
 
     var heating = await getLocalData(UtilitiesScreen.HEATING_VALUE) ?? 0;
     var electricity =
@@ -191,7 +187,7 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
     var option3 = await getLocalData(TransportationScreen.OPTION3) ?? 0;
     var option4 = await getLocalData(TransportationScreen.OPTION4) ?? 0;
 
-    double res = (heating +
+    var res = (heating +
             electricity +
             flight +
             fuel +
@@ -211,7 +207,15 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
         'heating = $heating\n electricty =  $electricity\n flight = $flight\n fuel = $fuel\n red_meat = $red_meat\n'
         'white meat = $white_meat\n + others = $others\n few email = $few_emails\n stream res = $stream_res\noption 1 = $option1\n'
         'option2 = $option2\noption 3 = $option3\noption 4 = $option4\n');
-    print('res = ${res.toStringAsFixed(2)} kgC02e/month\n');
+    print('res = ${res.toStringAsFixed(2)} ton C02e/month\n');
+    saveData(QuestinairesScreen.RESULT, res);
+    double testRes = await getLocalData(QuestinairesScreen.RESULT) ?? 0;
+    print('Test result are $testRes\n');
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()),
+      ModalRoute.withName(ProfileScreen.routeName),
+    );
   }
 
   void continueBtn(context) {

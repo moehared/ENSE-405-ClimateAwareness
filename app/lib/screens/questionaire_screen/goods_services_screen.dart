@@ -17,10 +17,18 @@ class _GoodsServicesScreenState extends State<GoodsServicesScreen> {
   final goodsServices = GoodsServices();
   double _questionOneValue = 0.0;
 
-  final double _max = 500;
-  final int step = 10;
+  final double _max = 5000;
+  final int step = 20;
   var _userChoice1 = false;
   var _userChoice2 = false;
+
+  @override
+  void initState() {
+    removeLocalData(GoodsServicesScreen.GOODS);
+    removeLocalData(GoodsServicesScreen.MORE_STREAMING);
+    removeLocalData(GoodsServicesScreen.FEW_DATA);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +54,13 @@ class _GoodsServicesScreenState extends State<GoodsServicesScreen> {
                   question: goodsServices.questions[0],
                   value: _questionOneValue,
                   onChanged: updateQuestionOneVal,
-                  button: UnknowButton(),
+                  button: UnknowButton(
+                    onTap: () {
+                      setState(() {
+                        _questionOneValue = 500;
+                      });
+                    },
+                  ),
                 ),
                 SizedBox(height: 20),
                 Column(

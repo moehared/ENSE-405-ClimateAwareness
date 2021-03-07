@@ -2,6 +2,7 @@
     package="com.example.app">
    <application
         android:label="app"
+        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

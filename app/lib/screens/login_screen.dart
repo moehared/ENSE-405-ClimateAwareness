@@ -230,8 +230,12 @@ class _LoginScreenState extends State<LoginScreen> {
   void _signInForm() async {
     var isValid = _form.currentState.validate();
     _form.currentState.save();
+    setState(() {
+      _showSpinner = true;
+    });
     var provider = Provider.of<AuthService>(context, listen: false);
     bool res = await provider.signIn(email: email, password: pass);
+
     if (!isValid) {
       setState(() {
         isError = true;
@@ -255,9 +259,6 @@ class _LoginScreenState extends State<LoginScreen> {
       });
       print('sign in button tapped inside isError');
     }
-    setState(() {
-      _showSpinner = true;
-    });
     print('email: $email\n password:$pass\n');
     print('res value = $res\n');
 
@@ -301,7 +302,10 @@ class _LoginScreenState extends State<LoginScreen> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text("OK!"),
+          child: Text(
+            "OK!",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         DialogButton(
           onPressed: () {
@@ -309,7 +313,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 .sendEmailVerification();
             Navigator.of(context).pop();
           },
-          child: Text("Re-send verification"),
+          child: Text(
+            "Re-send verification",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ],
     ).show();

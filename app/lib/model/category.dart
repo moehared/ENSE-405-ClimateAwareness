@@ -39,9 +39,18 @@ class GoodsServices extends Category {
 }
 
 class Utilities extends Category {
+  /// all the calculation are indirect. meaning each calculation is associated with its carbon emission factor and we are just estimating. a proper way calculating is using direct formula, meaning getting all the require input (e.g. energy usage(electricity, heating value, water usage) from user and calculate carbon  footprint . this will produce a precise result. however, using indirect approach will do now in order to get an estimate value.
+
   String get categoryTitle => 'Utilities';
   static const double ELECTRICITY_EMISSION_FACTOR =
       0.0591; // kg c02 e per month
+  static const double HIGH_WATER_USAGE =
+      75.70; // litre for 20 min of high shower,car wash , ect
+  static const double LOW_NORMAL_WATER_USAGE =
+      5678.118; // assuming that low water usage will be half of average water usage.
+  static const double AVERAGE_NORMAL_WATER_USAGE =
+      11356.24; // about 11,000 litre per month or 3000 gallon per month
+  static const double WATER_EMISSION_FACTOR = 0.0004; // kg C02 / litre
   static const double HEATING_EMISSION_FACTOR =
       0.031; // kg c02e /litre per month
   List<String> get questions {

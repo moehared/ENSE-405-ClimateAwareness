@@ -11,6 +11,9 @@ class UtilitiesScreen extends StatefulWidget {
   static const String LOW = 'LOW';
   static const String NORMAL = 'NORMAL';
   static const String HIGH = 'HIGH';
+  static const String LOW_WATER_USAGE = 'LOW_WATER_USAGE';
+  static const String NORMAL_WATER_USAGE = 'NORMAL_WATER_USAGE';
+  static const String HIGH_WATER_USAGE = 'HIGH_WATER_USAGE';
 
   @override
   _UtilitiesScreenState createState() => _UtilitiesScreenState();
@@ -23,6 +26,12 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
   var _userChoice1 = false;
   var _userChoice2 = false;
   var _userChoice3 = false;
+
+  @override
+  void initState() {
+    removedSavedData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +121,19 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
       _userChoice2 = false;
       _userChoice3 = false;
     });
-    saveData(UtilitiesScreen.LOW, _userChoice1);
+    if (_userChoice1) {
+      var res = Utilities.LOW_NORMAL_WATER_USAGE *
+          30 *
+          Utilities.WATER_EMISSION_FACTOR;
+      saveData(UtilitiesScreen.LOW_WATER_USAGE, res);
+      saveData(UtilitiesScreen.LOW, _userChoice1);
+    }
+    if (_userChoice2 == false || _userChoice3 == false) {
+      _removeData(UtilitiesScreen.HIGH);
+      _removeData(UtilitiesScreen.NORMAL);
+      _removeData(UtilitiesScreen.HIGH_WATER_USAGE);
+      _removeData(UtilitiesScreen.NORMAL_WATER_USAGE);
+    }
   }
 
   void _selectedChoice2() {
@@ -121,7 +142,20 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
       _userChoice1 = false;
       _userChoice3 = false;
     });
-    saveData(UtilitiesScreen.NORMAL, _userChoice2);
+
+    if (_userChoice2) {
+      var res = Utilities.AVERAGE_NORMAL_WATER_USAGE *
+          30 *
+          Utilities.WATER_EMISSION_FACTOR;
+      saveData(UtilitiesScreen.NORMAL_WATER_USAGE, res);
+      saveData(UtilitiesScreen.NORMAL, _userChoice2);
+    }
+    if (_userChoice1 == false || _userChoice3 == false) {
+      _removeData(UtilitiesScreen.LOW);
+      _removeData(UtilitiesScreen.HIGH);
+      _removeData(UtilitiesScreen.HIGH_WATER_USAGE);
+      _removeData(UtilitiesScreen.LOW_WATER_USAGE);
+    }
   }
 
   void _selectedChoice3() {
@@ -130,7 +164,18 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
       _userChoice1 = false;
       _userChoice2 = false;
     });
-    saveData(UtilitiesScreen.HIGH, _userChoice3);
+    if (_userChoice1) {
+      var res =
+          Utilities.HIGH_WATER_USAGE * 30 * Utilities.WATER_EMISSION_FACTOR;
+      saveData(UtilitiesScreen.HIGH_WATER_USAGE, res);
+      saveData(UtilitiesScreen.HIGH, _userChoice3);
+    }
+    if (_userChoice1 == false || _userChoice2 == false) {
+      _removeData(UtilitiesScreen.LOW);
+      _removeData(UtilitiesScreen.NORMAL);
+      _removeData(UtilitiesScreen.LOW_WATER_USAGE);
+      _removeData(UtilitiesScreen.NORMAL_WATER_USAGE);
+    }
   }
 
   void updateQuestionOneVal(value) {
@@ -153,5 +198,16 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
 
   void _removeData(key) {
     removeLocalData(key);
+  }
+
+  void removedSavedData() {
+    _removeData(UtilitiesScreen.HIGH);
+    _removeData(UtilitiesScreen.HIGH_WATER_USAGE);
+    _removeData(UtilitiesScreen.LOW);
+    _removeData(UtilitiesScreen.LOW_WATER_USAGE);
+    _removeData(UtilitiesScreen.NORMAL_WATER_USAGE);
+    _removeData(UtilitiesScreen.NORMAL);
+    removeLocalData(UtilitiesScreen.HEATING_VALUE);
+    _removeData(UtilitiesScreen.ELECTRICITY_VALUE);
   }
 }

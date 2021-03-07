@@ -43,7 +43,7 @@ class SliderWidget extends StatelessWidget {
                       ? '${value.toInt()}'
                       : step == 10
                           ? '\$${value.toInt()}'
-                          : value == 500.00
+                          : value == 5000.00
                               ? '\$${value.toInt()}+'
                               : '\$${value.toInt()}',
           onChanged: onChanged),

@@ -65,7 +65,7 @@ class UserMenuPopUp extends StatelessWidget {
           SizedBox(height: 5),
           BuildTile(
             iconData: Icons.question_answer,
-            label: 'Re-do Questions',
+            label: 'Questionnaire',
             onTap: () {
               Navigator.of(context).pushNamed(QuestinairesScreen.routeName);
             },

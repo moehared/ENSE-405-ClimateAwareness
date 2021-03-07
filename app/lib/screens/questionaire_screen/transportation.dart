@@ -26,6 +26,12 @@ class _TransportationScreenState extends State<TransportationScreen> {
   var _userChoice4 = false;
 
   @override
+  void initState() {
+    removeSavedData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
     return SingleChildScrollView(
@@ -202,5 +208,14 @@ class _TransportationScreenState extends State<TransportationScreen> {
       await removeLocalData(TransportationScreen.OPTION2);
       await removeLocalData(TransportationScreen.OPTION3);
     }
+  }
+
+  void removeSavedData() {
+    removeLocalData(TransportationScreen.FUEL_VALUE);
+    removeLocalData(TransportationScreen.AIRPLANE_VALUE);
+    removeLocalData(TransportationScreen.OPTION1);
+    removeLocalData(TransportationScreen.OPTION2);
+    removeLocalData(TransportationScreen.OPTION3);
+    removeLocalData(TransportationScreen.OPTION4);
   }
 }

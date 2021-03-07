@@ -44,6 +44,8 @@ class AuthService {
           email: userModel.email, password: userModel.password);
       if (user != null) {
         userRef.child(_firebaseAuth.currentUser.uid).set(userModel.toJson());
+        String fullName = userModel.firstName + userModel.lastName;
+        _firebaseAuth.currentUser.updateProfile(displayName: fullName);
         isSignUp = true;
       }
     } on FirebaseAuthException catch (e) {

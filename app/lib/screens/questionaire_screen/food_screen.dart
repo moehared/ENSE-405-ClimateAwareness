@@ -21,6 +21,14 @@ class _FoodScreenState extends State<FoodScreen> {
   final int _step = 8;
 
   @override
+  void initState() {
+    removeLocalData(FoodScreen.OTHER_SNACKS);
+    removeLocalData(FoodScreen.RED_MEAT_VALUE);
+    removeLocalData(FoodScreen.WHITE_MEAT_VALUE);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
     return SingleChildScrollView(

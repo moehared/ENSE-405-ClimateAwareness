@@ -59,16 +59,16 @@ class _CommunityScreenState extends State<CommunityScreen>
                 height: 30,
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColorLight,
-                  borderRadius: BorderRadius.circular(
-                    10,
-                  ),
+                  // borderRadius: BorderRadius.circular(
+                  //   10,
+                  // ),
                 ),
                 child: TabBar(
                   controller: _tabController,
                   indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      10.0,
-                    ),
+                    // borderRadius: BorderRadius.circular(
+                    //   10.0,
+                    // ),
                     color: Theme.of(context).accentColor,
                   ),
                   tabs: [

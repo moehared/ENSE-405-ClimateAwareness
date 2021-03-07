@@ -1,5 +1,6 @@
 import 'package:app/screens/questionaire_screen/food_screen.dart';
 import 'package:app/screens/questionaire_screen/goods_services_screen.dart';
+import 'package:app/screens/questionaire_screen/questinaires_screen.dart';
 import 'package:app/screens/questionaire_screen/transportation.dart';
 import 'package:app/screens/questionaire_screen/utilities_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,6 +51,8 @@ Future<dynamic> getLocalData(String key) async {
     case TransportationScreen.OPTION3:
       return pref.getDouble(key);
     case TransportationScreen.OPTION4:
+      return pref.getDouble(key);
+    case QuestinairesScreen.RESULT:
       return pref.getDouble(key);
   }
 }
