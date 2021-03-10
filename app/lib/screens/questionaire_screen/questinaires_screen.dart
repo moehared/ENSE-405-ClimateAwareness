@@ -5,6 +5,7 @@ import 'package:app/screens/questionaire_screen/food_screen.dart';
 import 'package:app/screens/questionaire_screen/goods_services_screen.dart';
 import 'package:app/screens/questionaire_screen/transportation.dart';
 import 'package:app/screens/questionaire_screen/utilities_screen.dart';
+import 'package:app/screens/tabs.dart';
 import 'package:app/share_pref/local_data.dart';
 import 'package:app/widget/animated_widget.dart';
 import 'package:flutter/material.dart';
@@ -213,8 +214,8 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
     print('Test result are $testRes\n');
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()),
-      ModalRoute.withName(ProfileScreen.routeName),
+      MaterialPageRoute(builder: (BuildContext context) => HomePage()),
+      ModalRoute.withName(HomePage.routeName),
     );
   }
 

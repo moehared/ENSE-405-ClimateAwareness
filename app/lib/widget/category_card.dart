@@ -12,7 +12,8 @@ class CategoriesCards extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
       child: Container(
-        height: deviceSize.height * 0.2,
+        height: deviceSize.height * 0.20,
+        width: deviceSize.width,
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: FittedBox(
           fit: BoxFit.fill,

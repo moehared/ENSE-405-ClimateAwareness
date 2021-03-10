@@ -40,8 +40,8 @@ class _HomePageState extends State<HomePage> {
           items: [
             BottomNavigationBarItem(
               backgroundColor: Theme.of(context).primaryColor,
-              icon: Icon(Icons.explore),
-              label: 'learn',
+              icon: Icon(Icons.home_filled),
+              label: 'Home',
             ),
             BottomNavigationBarItem(
               backgroundColor: Theme.of(context).primaryColor,

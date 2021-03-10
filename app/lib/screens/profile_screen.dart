@@ -121,29 +121,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               ResultChart(res ?? 0),
               Divider(color: Colors.black26),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
-                child: Text(
-                  'Personalized Tips',
-                  style: TextStyle(
-                    fontFamily: 'Roboto-Medium',
-                    color: Colors.white,
-                  ),
-                ),
+              TitleAndButtonRow(
+                title: 'Personalized Tips',
+                viewAll: () {},
               ),
               categories,
               Divider(color: Colors.black26),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
-                child: Text(
-                  'Achievement',
-                  style: TextStyle(
-                    fontFamily: 'Roboto-Medium',
-                    color: Colors.white,
-                  ),
-                ),
+              TitleAndButtonRow(
+                title: 'Achievement',
+                viewAll: () {},
               ),
               categories,
             ],
@@ -164,6 +150,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
           topRight: Radius.circular(32),
         ),
       ),
+    );
+  }
+}
+
+class TitleAndButtonRow extends StatelessWidget {
+  final String title;
+  final Function viewAll;
+
+  const TitleAndButtonRow({Key key, this.title, this.viewAll})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+          child: Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'Roboto-Medium',
+              color: Colors.white,
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: viewAll,
+          child: Text(
+            'View All',
+            style: TextStyle(
+              color: Theme.of(context).accentColor,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -230,30 +252,10 @@ class UserAvatar extends StatelessWidget {
                   Icons.camera_alt_rounded,
                   color: Theme.of(context).accentColor,
                   size: 26,
-                )),
+                ),),
           ),
-          // Positioned(
-          //   bottom: 20,
-          //   right: 10,
-          //   top: 80,
-          //   child: Icon(
-          //     Icons.camera_alt_rounded,
-          //     size: 26,
-          //     color: Theme.of(context).accentColor,
-          //   ),
-          // )
         ],
       ),
     );
   }
 }
-
-// Container(
-// height: 26,
-// width: 26,
-// child: Icon(
-// Icons.camera_alt_rounded,
-// size: 26,
-// color: Theme.of(context).accentColor,
-// ),
-// ),

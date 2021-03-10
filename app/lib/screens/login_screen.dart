@@ -279,7 +279,8 @@ class _LoginScreenState extends State<LoginScreen> {
         isError = true;
       });
       print('sign in button tapped inside else statment');
-      _errorMsg = provider.signInErrorMsg.split(".")[0];
+      _errorMsg = provider.signInErrorMsg; //.split(".")[0];
+      print(_errorMsg);
     }
     if (provider.currentUser == null || !provider.currentUser.emailVerified) {
       setState(() {

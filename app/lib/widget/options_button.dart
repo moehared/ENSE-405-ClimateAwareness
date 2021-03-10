@@ -8,6 +8,7 @@ class OptionsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final media = MediaQuery.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
       child: GestureDetector(
@@ -15,6 +16,7 @@ class OptionsButton extends StatelessWidget {
         // splashColor: Theme.of(context).accentColor.withAlpha(32),
         // borderRadius: BorderRadius.circular(10),
         child: Container(
+          width: double.infinity,
           margin: EdgeInsets.only(top: 10),
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           decoration: BoxDecoration(
@@ -41,7 +43,7 @@ class OptionsButton extends StatelessWidget {
                       ),
                     ),
               SizedBox(width: 20),
-              Text(choice)
+              Expanded(child: Text(choice))
             ],
           ),
         ),

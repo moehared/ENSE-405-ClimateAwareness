@@ -17,9 +17,9 @@ class ReusableCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
     return Container(
-      width: 150,
+      width: deviceSize.width * 0.30,
       margin: EdgeInsets.only(right: 10.0),
-      height: deviceSize.height * 0.30 - 50,
+      height: deviceSize.height * 0.25 - 60,
       decoration: BoxDecoration(
         color: colour,
         borderRadius: BorderRadius.all(Radius.circular(20.0)),

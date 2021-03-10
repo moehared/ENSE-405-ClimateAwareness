@@ -17,8 +17,9 @@ class ResultChart extends StatelessWidget {
             RadialAxis(minimum: 0, maximum: 2.5, ranges: <GaugeRange>[
               GaugeRange(startValue: 0, endValue: 1, color: Colors.green),
               GaugeRange(
-                  startValue: 1, endValue: 1.4, color: Colors.yellow.shade900),
-              GaugeRange(startValue: 1.4, endValue: 2.5, color: Colors.red)
+                  startValue: 1, endValue: 1.4, color: Colors.yellow.shade700),
+              GaugeRange(
+                  startValue: 1.4, endValue: 2.5, color: Colors.red.shade900)
             ], pointers: <GaugePointer>[
               NeedlePointer(
                   value: res,

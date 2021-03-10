@@ -1,10 +1,14 @@
 import 'package:app/screens/filter_screen/all_screen.dart';
 import 'package:app/screens/filter_screen/article_screen.dart';
 import 'package:app/screens/filter_screen/media.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+final _firebase = FirebaseFirestore.instance;
 
 class CommunityScreen extends StatefulWidget {
   static const routeName = '/CommunityScreen';
+  static const COMMUNITY_COLLECTION = 'community_post';
 
   @override
   _CommunityScreenState createState() => _CommunityScreenState();
@@ -36,11 +40,11 @@ class _CommunityScreenState extends State<CommunityScreen>
           title: Text('Community'),
           actions: [
             IconButton(
-              icon: Icon(
-                Icons.add,
-              ),
-              onPressed: () {},
-            ),
+                icon: Icon(
+                  Icons.add,
+                ),
+                onPressed: () {} //_addPost,
+                ),
           ],
         ),
         body: Container(
@@ -94,4 +98,16 @@ class _CommunityScreenState extends State<CommunityScreen>
       ),
     );
   }
+
+  // void _addPost() {
+  //   // var post = userRef.child('/community_post').push();
+  //   Map<String, dynamic> data = {
+  //     'title': 'test1',
+  //     'link': 'www.123test.com',
+  //     'desc': 'this is a test'
+  //   };
+  //   _firebase.collection(CommunityScreen.COMMUNITY_COLLECTION).add(data);
+  //   // post.set(data);
+  //   print('data saved');
+  // }
 }

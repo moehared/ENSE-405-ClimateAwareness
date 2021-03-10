@@ -28,7 +28,7 @@ class QuestionCard extends StatelessWidget {
         width: double.infinity,
         height: Platform.isIOS
             ? MediaQuery.of(context).size.height * 0.20
-            : MediaQuery.of(context).size.height * 0.25,
+            : MediaQuery.of(context).size.height * 0.30,
         decoration: BoxDecoration(
             // color: Colors.purple,
             borderRadius: BorderRadius.circular(32.0),
@@ -54,7 +54,7 @@ class QuestionCard extends StatelessWidget {
               onChanged: onChanged,
               value: value,
             ),
-            button,
+            Expanded(child: button),
           ],
         ),
       ),

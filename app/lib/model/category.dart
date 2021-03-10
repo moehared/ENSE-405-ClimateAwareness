@@ -72,7 +72,7 @@ class Transportation extends Category {
   String get categoryTitle => 'Transportation';
   List<String> get questions {
     return [
-      'Hours spent in airplane while travelling ',
+      'Hours spent in airplane while travelling last month ',
       'cost of fuel consumption per month. \n0 if you don’t drive.',
       'On average, how long you spend on public transportation?'
     ];
