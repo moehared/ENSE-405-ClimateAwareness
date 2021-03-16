@@ -28,7 +28,7 @@ this application is intened with the hope of reducing carbon footprint to suppor
 
 4: [MVP Progress](https://github.com/moehared/ENSE-405-ClimateAwareness/tree/main/MVP)
 * [MVP 1 check in ](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/MVP/MVP_1.pdf)
-
+* [MVP 2 Vlog](https://youtu.be/O9iqu-7B7Ik)
 
 
 
