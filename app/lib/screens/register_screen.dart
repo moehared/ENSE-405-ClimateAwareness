@@ -8,6 +8,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
 import '../constant.dart';
+import '../main.dart';
 import 'emailverification_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -30,7 +31,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   var _isEmailValid = false;
 
-  var user = UserModel(firstName: "", lastName: "", email: "", password: "");
+  var user = UserModel(
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      score: 0,
+      tips: tips.toList());
 
   // @override
   // void dispose() {
@@ -122,11 +129,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             textInputAction: TextInputAction.next,
                             onSaved: (lastName) {
                               user = UserModel(
-                                firstName: user.firstName,
-                                lastName: lastName,
-                                email: user.email,
-                                password: user.password,
-                              );
+                                  firstName: user.firstName,
+                                  lastName: lastName,
+                                  email: user.email,
+                                  password: user.password,
+                                  tips: user.tips,
+                                  score: user.score);
                             },
                             focusNode: _lastNameFocus,
                             onFieldSubmitted: (_) {
@@ -165,11 +173,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                             onSaved: (email) {
                               user = UserModel(
-                                firstName: user.firstName,
-                                lastName: user.lastName,
-                                email: email,
-                                password: user.password,
-                              );
+                                  firstName: user.firstName,
+                                  lastName: user.lastName,
+                                  email: email,
+                                  password: user.password,
+                                  tips: user.tips,
+                                  score: user.score);
                             },
                             onChanged: (email) {
                               if (!EmailValidator.validate(email)) {
@@ -208,11 +217,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                             onSaved: (pass) {
                               user = UserModel(
-                                firstName: user.firstName,
-                                lastName: user.lastName,
-                                email: user.email,
-                                password: pass,
-                              );
+                                  firstName: user.firstName,
+                                  lastName: user.lastName,
+                                  email: user.email,
+                                  password: pass,
+                                  tips: user.tips,
+                                  score: user.score);
                             },
                             onChanged: (_) {
                               print('value of email focus = ' +
@@ -316,7 +326,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ModalRoute.withName(ConfirmEmail.routeName),
       );
     } else {
-      //TODO: handle sign up error
+      //TODO: handle sign up error if user is already register with same email
     }
   }
 }

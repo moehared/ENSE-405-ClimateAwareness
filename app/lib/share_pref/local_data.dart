@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:app/main.dart';
+import 'package:app/model/personalize_tips.dart';
+import 'package:app/screens/profile_screen.dart';
 import 'package:app/screens/questionaire_screen/food_screen.dart';
 import 'package:app/screens/questionaire_screen/goods_services_screen.dart';
 import 'package:app/screens/questionaire_screen/questinaires_screen.dart';
@@ -13,9 +18,17 @@ void saveData(String key, var data) async {
   if (data is bool) {
     pref.setBool(key, data);
   }
+
+  if (data is Set<PersonalizedTip> && data != null) {
+    pref.setString(key, json.encode(jsonEncodeTips()));
+  }
+
+  if (data is String) {
+    pref.setString(key, data);
+  }
 }
 
-Future<dynamic> getLocalData(String key) async {
+Future getLocalData(String key) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   switch (key) {
     case UtilitiesScreen.HEATING_VALUE:
@@ -44,6 +57,12 @@ Future<dynamic> getLocalData(String key) async {
       return pref.getBool(key);
     case UtilitiesScreen.HIGH:
       return pref.getBool(key);
+    case UtilitiesScreen.NORMAL_WATER_USAGE:
+      return pref.getDouble(key);
+    case UtilitiesScreen.LOW_WATER_USAGE:
+      return pref.getDouble(key);
+    case UtilitiesScreen.HIGH_WATER_USAGE:
+      return pref.getDouble(key);
     case TransportationScreen.OPTION1:
       return pref.getDouble(key);
     case TransportationScreen.OPTION2:
@@ -54,10 +73,20 @@ Future<dynamic> getLocalData(String key) async {
       return pref.getDouble(key);
     case QuestinairesScreen.RESULT:
       return pref.getDouble(key);
+    case ProfileScreen.IMAGE_KEY:
+      return pref.getString(key);
+    case PersonalizedTip.TIPS_KEY:
+      return json.decode(pref.getString(key));
   }
 }
 
 Future<void> removeLocalData(String key) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.remove(key);
+}
+
+List<Map<String, dynamic>> jsonEncodeTips() {
+  return tips.map((e) {
+    return e.toJson();
+  }).toList();
 }

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'auth/auth_wrapper.dart';
+import 'model/personalize_tips.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,8 @@ void main() async {
 
 DatabaseReference userRef =
     FirebaseDatabase.instance.reference().child('users');
+
+Set<PersonalizedTip> tips = {};
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -28,7 +31,40 @@ class MyApp extends StatelessWidget {
         ),
         StreamProvider(
           create: (ctx) => ctx.read<AuthService>().authState,
-        )
+        ),
+        ChangeNotifierProvider<PersonalizedTip>(
+          create: (_) => HighWaterUsage(),
+        ),
+        ChangeNotifierProvider<PersonalizedTip>(
+          create: (_) => LowWaterUsage(),
+        ),
+        ChangeNotifierProvider<PersonalizedTip>(
+          create: (_) => NormalWaterUsage(),
+        ),
+        ChangeNotifierProvider<PersonalizedTip>(
+          create: (_) => Drive(),
+        ),
+        ChangeNotifierProvider<PersonalizedTip>(
+          create: (_) => PublicTransportation(),
+        ),
+        ChangeNotifierProvider<PersonalizedTip>(
+          create: (_) => AirPlane(),
+        ),
+        ChangeNotifierProvider<PersonalizedTip>(
+          create: (_) => FoodConsumption(),
+        ),
+        ChangeNotifierProvider<PersonalizedTip>(
+          create: (_) => Goods(),
+        ),
+        ChangeNotifierProvider<PersonalizedTip>(
+          create: (_) => FewDataConsumptions(),
+        ),
+        ChangeNotifierProvider<PersonalizedTip>(
+          create: (_) => MoreDataConsumptions(),
+        ),
+        ChangeNotifierProvider<PersonalizedTip>(
+          create: (_) => EnergyConsumption(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

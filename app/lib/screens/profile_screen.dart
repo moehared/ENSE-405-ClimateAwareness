@@ -1,10 +1,13 @@
-import 'dart:io' show File;
+import 'dart:io' show File, Platform;
 
 import 'package:app/auth/auth_service.dart';
+import 'package:app/main.dart';
+import 'package:app/model/personalize_tips.dart';
+import 'package:app/screens/personalized_view_all_screen.dart';
 import 'package:app/screens/questionaire_screen/questinaires_screen.dart';
 import 'package:app/share_pref/local_data.dart';
-import 'package:app/widget/category_card.dart';
 import 'package:app/widget/result_chart.dart';
+import 'package:app/widget/reusable_card.dart';
 import 'package:app/widget/user_setting_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
@@ -14,13 +17,14 @@ import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const routeName = '/ProfileScreen';
+  static const IMAGE_KEY = '/IMAGE_KEY';
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final CategoriesCards categories = CategoriesCards();
+  var tipData = [];
   File _image;
   final imagePicker = ImagePicker();
   double res = 0.0;
@@ -28,13 +32,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future getGallery() async {
     final pickedFile = await imagePicker.getImage(source: ImageSource.gallery);
 
-    setState(() {
-      if (pickedFile != null) {
+    if (pickedFile != null) {
+      setState(() {
         _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
+      });
+      saveData(ProfileScreen.IMAGE_KEY, _image.path);
+    } else {
+      print('No image selected.');
+    }
+  }
+
+  final newList = tips.where((element) {
+    if (element.userChoice == false) {
+      return false;
+    }
+    return true;
+  });
+
+  loadImage() async {
+    final imageString = await getLocalData(ProfileScreen.IMAGE_KEY) ?? null;
+
+    if (imageString != null) {
+      setState(() {
+        _image = File(imageString);
+      });
+    }
   }
 
   Future getCamera() async {
@@ -59,13 +81,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
       }
     });
+    _getTips();
+    loadImage();
     super.initState();
+  }
+
+  _getTips() async {
+    final res = await getLocalData(PersonalizedTip.TIPS_KEY) ?? null;
+    if (res != null) {
+      setState(() {
+        tipData = res;
+        // print('TIP data is $tipData\n');
+        // tipData.forEach((element) {
+        //   print('Retrieve data from json decode is ${element['type']}\n');
+        // });
+      });
+    } else {
+      print('Result retrieve is null\n');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<AuthService>(context, listen: false);
     final media = MediaQuery.of(context);
+    final height = media.size.height;
+    print('Height of ${Platform.isIOS ? 'Ios' : 'android'} is : $height');
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -123,15 +164,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Divider(color: Colors.black26),
               TitleAndButtonRow(
                 title: 'Personalized Tips',
-                viewAll: () {},
+                viewAll: () {
+                  Navigator.of(context).pushNamed(
+                      PersonalizedViewAllScreen.PERSONALIZED_VIEW_ALL);
+                },
               ),
-              categories,
+              // categories,
+              if (tipData.isNotEmpty)
+                Container(
+                  height: height >= 926 ? height * 0.15 : height * 0.20,
+                  width: double.infinity,
+                  child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (ctx, index) {
+                      // var data = tipData.elementAt(index).values.toList();
+                      var data = tipData[index];
+                      // var data = newList.elementAt(index);
+                      return ReusableCard(
+                        // id: data.id,
+                        // imageAsset: data.image,
+                        // subTitle: data.subTitle,
+                        id: data['id'],
+                        imageAsset: data['image'],
+                        subTitle: data['subtitle'],
+                      );
+                    },
+                    itemCount: tipData.length,
+                    scrollDirection: Axis.horizontal,
+                  ),
+                ),
+              if (tipData.isEmpty)
+                Center(
+                  child: Text(
+                      'No personalized tips yet. start answering questionnaires'),
+                ),
+              SizedBox(height: 5),
               Divider(color: Colors.black26),
               TitleAndButtonRow(
                 title: 'Achievement',
                 viewAll: () {},
               ),
-              categories,
+              Text('under construction'),
             ],
           ),
         ),
@@ -231,28 +304,29 @@ class UserAvatar extends StatelessWidget {
             left: 60,
             top: 80,
             child: FocusedMenuHolder(
-                blurSize: 5.0,
-                animateMenuItems: true,
-                openWithTap: true,
-                menuWidth: media.size.width * 0.50,
-                menuItems: [
-                  FocusedMenuItem(
-                    title: Text('Camera'),
-                    trailingIcon: Icon(Icons.camera_alt_rounded),
-                    onPressed: camera,
-                  ),
-                  FocusedMenuItem(
-                    title: Text('Gallery'),
-                    trailingIcon: Icon(Icons.photo),
-                    onPressed: getImage,
-                  ),
-                ],
-                onPressed: () {},
-                child: Icon(
-                  Icons.camera_alt_rounded,
-                  color: Theme.of(context).accentColor,
-                  size: 26,
-                ),),
+              blurSize: 5.0,
+              animateMenuItems: true,
+              openWithTap: true,
+              menuWidth: media.size.width * 0.50,
+              menuItems: [
+                FocusedMenuItem(
+                  title: Text('Camera'),
+                  trailingIcon: Icon(Icons.camera_alt_rounded),
+                  onPressed: camera,
+                ),
+                FocusedMenuItem(
+                  title: Text('Gallery'),
+                  trailingIcon: Icon(Icons.photo),
+                  onPressed: getImage,
+                ),
+              ],
+              onPressed: () {},
+              child: Icon(
+                Icons.camera_alt_rounded,
+                color: Theme.of(context).accentColor,
+                size: 26,
+              ),
+            ),
           ),
         ],
       ),

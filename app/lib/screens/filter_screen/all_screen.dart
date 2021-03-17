@@ -1,19 +1,33 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AllScreen extends StatelessWidget {
-  final _firebase = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('All screen'),
-          ],
-        ),
+        child: Text('all screen'),
       ),
     );
   }
 }
+
+// List<Widget> getData() {
+//   List<Widget> item = [];
+//   newList.forEach((e) {
+//     if (e != null) {
+//       item.add(
+//         Column(
+//           children: [
+//             Text('Type: ${e.type}'),
+//             Text('User choice: ${e.userChoice}')
+//           ],
+//         ),
+//       );
+//     }
+//
+//     setState(() {
+//       data = item;
+//     });
+//   });
+//   return item;
+// }

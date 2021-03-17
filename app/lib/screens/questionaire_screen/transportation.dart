@@ -1,8 +1,33 @@
+import 'package:app/main.dart';
 import 'package:app/model/category.dart';
+import 'package:app/model/personalize_tips.dart';
+import 'package:app/personalize_data/data.dart';
 import 'package:app/share_pref/local_data.dart';
 import 'package:app/widget/options_button.dart';
 import 'package:app/widget/quesion_card.dart';
 import 'package:flutter/material.dart';
+
+var plane = AirPlane(
+  id: '10006',
+  tip: TipData.PLANE_USAGE_TIP,
+  type: 'plane',
+  subTitle: 'dont take unnecessary flight',
+  image: 'images/plane.jpg',
+);
+var car = Drive(
+  id: '10007',
+  tip: TipData.CAR_TIP,
+  type: 'car',
+  subTitle: 'Cycle or walk short distance',
+  image: 'images/less_driving.png',
+);
+var public = PublicTransportation(
+  id: '10008',
+  tip: TipData.PUBLIC_USAGE_TIP,
+  type: 'public transportation',
+  subTitle: 'taking public transportation',
+  image: 'images/public.jpg',
+);
 
 class TransportationScreen extends StatefulWidget {
   static const String AIRPLANE_VALUE = 'FLIGHT_HOURS';
@@ -86,7 +111,7 @@ class _TransportationScreenState extends State<TransportationScreen> {
                       userChoice: _userChoice3,
                     ),
                     OptionsButton(
-                      onTap: _selectedChoice4,
+                      onTap: () => _selectedChoice4(context),
                       choice: 'None i drive',
                       userChoice: _userChoice4,
                     ),
@@ -110,6 +135,16 @@ class _TransportationScreenState extends State<TransportationScreen> {
       // transportation.setAirplaneValue(res);
       saveData(TransportationScreen.AIRPLANE_VALUE, res);
     });
+    if (_questionOneValue != 0.0) {
+      if (!tips.contains(plane.id)) {
+        tips.add(plane);
+        plane.setUserSelection(true);
+      } else {
+        plane.setUserSelection(true);
+      }
+    } else {
+      plane.setUserSelection(false);
+    }
   }
 
   void updateQuestionTwoVal(value) {
@@ -121,6 +156,16 @@ class _TransportationScreenState extends State<TransportationScreen> {
       print('res value 2  $res\n');
       saveData(TransportationScreen.FUEL_VALUE, res);
     });
+    if (_questionTwoValue != 0.0) {
+      if (!tips.contains(car.id)) {
+        tips.add(car);
+        car.setUserSelection(true);
+      } else {
+        car.setUserSelection(true);
+      }
+    } else {
+      car.setUserSelection(false);
+    }
   }
 
   void _selectedChoice1() async {
@@ -136,6 +181,13 @@ class _TransportationScreenState extends State<TransportationScreen> {
       var res = Transportation.BUS_EMISSION_FACTOR * 25;
       print('res option 1 $res\n');
       saveData(TransportationScreen.OPTION1, res);
+
+      if (!tips.contains(public.id)) {
+        tips.add(public);
+        public.setUserSelection(true);
+      } else {
+        public.setUserSelection(true);
+      }
     }
     if (_userChoice2 == false ||
         _userChoice3 == false ||
@@ -158,6 +210,12 @@ class _TransportationScreenState extends State<TransportationScreen> {
       var res = Transportation.BUS_EMISSION_FACTOR * 50;
       print('res for option2 $res\n');
       saveData(TransportationScreen.OPTION2, res);
+      if (!tips.contains(public.id)) {
+        tips.add(public);
+        public.setUserSelection(true);
+      } else {
+        public.setUserSelection(true);
+      }
     }
     if (_userChoice1 == false ||
         _userChoice3 == false ||
@@ -179,6 +237,12 @@ class _TransportationScreenState extends State<TransportationScreen> {
       // transportation.setPublicTransportation();
       var res = Transportation.BUS_EMISSION_FACTOR * 100;
       saveData(TransportationScreen.OPTION3, res);
+      if (!tips.contains(public.id)) {
+        tips.add(public);
+        public.setUserSelection(true);
+      } else {
+        public.setUserSelection(true);
+      }
     }
     if (_userChoice1 == false ||
         _userChoice2 == false ||
@@ -189,7 +253,7 @@ class _TransportationScreenState extends State<TransportationScreen> {
     }
   }
 
-  void _selectedChoice4() async {
+  void _selectedChoice4(context) async {
     setState(() {
       _userChoice4 = !_userChoice4;
       _userChoice1 = false;
@@ -200,6 +264,13 @@ class _TransportationScreenState extends State<TransportationScreen> {
       var res = Transportation.AVERAGE_KM_PER_MONTH *
           Transportation.CAR_EMISSION_FACTOR;
       saveData(TransportationScreen.OPTION4, res);
+
+      if (!tips.contains(car.id)) {
+        tips.add(car);
+        car.setUserSelection(true);
+      } else {
+        car.setUserSelection(true);
+      }
     }
     if (_userChoice1 == false ||
         _userChoice2 == false ||
@@ -217,5 +288,8 @@ class _TransportationScreenState extends State<TransportationScreen> {
     removeLocalData(TransportationScreen.OPTION2);
     removeLocalData(TransportationScreen.OPTION3);
     removeLocalData(TransportationScreen.OPTION4);
+    public.setUserSelection(false);
+    car.setUserSelection(false);
+    plane.setUserSelection(false);
   }
 }

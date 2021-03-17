@@ -1,5 +1,9 @@
+
 import 'dart:io';
 
+import 'package:app/main.dart';
+import 'package:app/model/personalize_tips.dart';
+import 'package:app/personalize_data/data.dart';
 import 'package:app/screens/profile_screen.dart';
 import 'package:app/screens/questionaire_screen/food_screen.dart';
 import 'package:app/screens/questionaire_screen/goods_services_screen.dart';
@@ -10,6 +14,22 @@ import 'package:app/share_pref/local_data.dart';
 import 'package:app/widget/animated_widget.dart';
 import 'package:flutter/material.dart';
 
+var foodSelection = FoodConsumption(
+  id: '11000',
+  tip: TipData.FOODS_TIP,
+  type: 'food consumption',
+  subTitle: 'food consumption',
+  image: 'images/food.png',
+);
+
+var _waterUsage = HighWaterUsage(
+  id: '1002',
+  type: 'high water',
+  tip: TipData.WATER_TIP,
+  subTitle: 'Use water efficiently',
+  image: 'images/high_water.jpg',
+);
+
 class QuestinairesScreen extends StatefulWidget {
   static const String routeName = '/QuestinairesScreen';
   static const String RESULT = 'CARBON_RESULT';
@@ -19,6 +39,7 @@ class QuestinairesScreen extends StatefulWidget {
 
 class _QuestinairesScreenState extends State<QuestinairesScreen>
     with SingleTickerProviderStateMixin {
+  Map<String, dynamic> tipData = {};
   final _pageController = PageController();
 
   int _selectedPage = 0;
@@ -82,15 +103,6 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
             scrollDirection: Axis.horizontal,
             controller: _pageController,
           ),
-          // Positioned(
-          //   child: LinearProgressIndicator(
-          //     value: _progressAnimation.value,
-          //     valueColor:
-          //         AlwaysStoppedAnimation<Color>(Theme.of(context).accentColor),
-          //     minHeight: 20,
-          //     backgroundColor: Colors.grey.shade300,
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -132,7 +144,7 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: _selectedPage == pages.length - 1
-                    ? _userProfile
+                    ? _doneQuestions
                     : nextQuestionScreen,
               ),
             ),
@@ -150,6 +162,8 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
     }
   }
 
+
+
   void nextQuestionScreen() {
     if (_selectedPage < pages.length - 1) {
       _selectedPage++;
@@ -159,59 +173,8 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
     }
   }
 
-  void _userProfile() async {
-    // var utilities = Utilities();
-    // var transportation = Transportation();
-    // var food = Food()..c02e;
-    // var goodsAndService = GoodsServices();
-    // double result = (utilities.c02e +
-    //         transportation.c02e +
-    //         food.c02e +
-    //         goodsAndService.c02e) /
-    //     1000;
-    // print('Results is = $result\n');
-
-    var heating = await getLocalData(UtilitiesScreen.HEATING_VALUE) ?? 0;
-    var electricity =
-        await getLocalData(UtilitiesScreen.ELECTRICITY_VALUE) ?? 0;
-    var flight = await getLocalData(TransportationScreen.AIRPLANE_VALUE) ?? 0;
-    var fuel = await getLocalData(TransportationScreen.FUEL_VALUE) ?? 0;
-    var red_meat = await getLocalData(FoodScreen.RED_MEAT_VALUE) ?? 0;
-    var white_meat = await getLocalData(FoodScreen.WHITE_MEAT_VALUE) ?? 0;
-    var others = await getLocalData(FoodScreen.OTHER_SNACKS) ?? 0;
-    var goods = await getLocalData(GoodsServicesScreen.GOODS) ?? 0;
-    var few_emails = await getLocalData(GoodsServicesScreen.FEW_DATA) ?? 0;
-    var stream_res =
-        await getLocalData(GoodsServicesScreen.MORE_STREAMING) ?? 0;
-    var option1 = await getLocalData(TransportationScreen.OPTION1) ?? 0;
-    var option2 = await getLocalData(TransportationScreen.OPTION2) ?? 0;
-    var option3 = await getLocalData(TransportationScreen.OPTION3) ?? 0;
-    var option4 = await getLocalData(TransportationScreen.OPTION4) ?? 0;
-
-    var res = (heating +
-            electricity +
-            flight +
-            fuel +
-            red_meat +
-            option1 +
-            option2 +
-            option3 +
-            option4 +
-            white_meat +
-            others +
-            goods +
-            few_emails +
-            stream_res) /
-        1000;
-
-    print(
-        'heating = $heating\n electricty =  $electricity\n flight = $flight\n fuel = $fuel\n red_meat = $red_meat\n'
-        'white meat = $white_meat\n + others = $others\n few email = $few_emails\n stream res = $stream_res\noption 1 = $option1\n'
-        'option2 = $option2\noption 3 = $option3\noption 4 = $option4\n');
-    print('res = ${res.toStringAsFixed(2)} ton C02e/month\n');
-    saveData(QuestinairesScreen.RESULT, res);
-    double testRes = await getLocalData(QuestinairesScreen.RESULT) ?? 0;
-    print('Test result are $testRes\n');
+  void _doneQuestions() async {
+     _saveUserChoice();
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (BuildContext context) => HomePage()),
@@ -244,5 +207,85 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
     });
 
     _progressController.forward();
+  }
+}
+
+void _saveUserChoice() async {
+  var heating = await getLocalData(UtilitiesScreen.HEATING_VALUE) ?? 0;
+  var electricity =
+      await getLocalData(UtilitiesScreen.ELECTRICITY_VALUE) ?? 0;
+  var flight = await getLocalData(TransportationScreen.AIRPLANE_VALUE) ?? 0;
+  var fuel = await getLocalData(TransportationScreen.FUEL_VALUE) ?? 0;
+  var redMeat = await getLocalData(FoodScreen.RED_MEAT_VALUE) ?? 0;
+  var whiteMeat = await getLocalData(FoodScreen.WHITE_MEAT_VALUE) ?? 0;
+  var others = await getLocalData(FoodScreen.OTHER_SNACKS) ?? 0;
+  var goods = await getLocalData(GoodsServicesScreen.GOODS) ?? 0;
+  var fewEmails = await getLocalData(GoodsServicesScreen.FEW_DATA) ?? 0;
+  var streamRes =
+      await getLocalData(GoodsServicesScreen.MORE_STREAMING) ?? 0;
+  var option1 = await getLocalData(TransportationScreen.OPTION1) ?? 0;
+  var option2 = await getLocalData(TransportationScreen.OPTION2) ?? 0;
+  var option3 = await getLocalData(TransportationScreen.OPTION3) ?? 0;
+  var option4 = await getLocalData(TransportationScreen.OPTION4) ?? 0;
+
+  var lowWater = await getLocalData(UtilitiesScreen.LOW_WATER_USAGE) ?? 0;
+  var highWater = await getLocalData(UtilitiesScreen.HIGH_WATER_USAGE) ?? 0;
+  var normalWater =
+      await getLocalData(UtilitiesScreen.NORMAL_WATER_USAGE) ?? 0;
+
+  if (redMeat != 0 || whiteMeat != 0 || others != 0) {
+    if (!tips.contains(foodSelection.id)) {
+      tips.add(foodSelection);
+      foodSelection.setUserSelection(true);
+    } else {
+      foodSelection.setUserSelection(true);
+    }
+  } else {
+    foodSelection.setUserSelection(false);
+  }
+
+  if (lowWater > 0 || highWater > 0 || normalWater > 0) {
+    _waterSelection();
+  } else {
+    _waterUsage.setUserSelection(false);
+    print('water is set to false');
+  }
+
+  var res = (heating +
+      electricity +
+      flight +
+      fuel +
+      redMeat +
+      option1 +
+      option2 +
+      option3 +
+      option4 +
+      whiteMeat +
+      others +
+      goods +
+      lowWater +
+      highWater +
+      normalWater +
+      fewEmails +
+      streamRes) /
+      1000;
+
+  print(
+      'heating = $heating\n electricty =  $electricity\n flight = $flight\n fuel = $fuel\n red_meat = $redMeat\n'
+          'white meat = $whiteMeat\n + others = $others\n few email = $fewEmails\n stream res = $streamRes\noption 1 = $option1\n'
+          'option2 = $option2\noption 3 = $option3\noption 4 = $option4\nlow water = $lowWater\nHigh water = $highWater\nnormal = $normalWater\n');
+  print('res = ${res.toStringAsFixed(2)} ton C02e/month\n');
+  saveData(QuestinairesScreen.RESULT, res);
+  saveData(PersonalizedTip.TIPS_KEY, tips);
+}
+
+void _waterSelection() {
+  if (tips.contains(_waterUsage.id)) {
+    tips.add(_waterUsage);
+    _waterUsage.setUserSelection(true);
+    print('water usage is added\n');
+  } else {
+    _waterUsage.setUserSelection(true);
+    print('water usage was already added.\n');
   }
 }

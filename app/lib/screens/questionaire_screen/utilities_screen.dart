@@ -1,9 +1,42 @@
+import 'package:app/main.dart';
 import 'package:app/model/category.dart';
+import 'package:app/model/personalize_tips.dart';
+import 'package:app/personalize_data/data.dart';
 import 'package:app/share_pref/local_data.dart';
 import 'package:app/widget/options_button.dart';
 import 'package:app/widget/quesion_card.dart';
 import 'package:app/widget/unknown_button.dart';
 import 'package:flutter/material.dart';
+
+var low = LowWaterUsage(
+  id: '1000',
+  type: 'low water',
+  tip: TipData.WATER_TIP,
+  subTitle: 'you doing good for using low water',
+  image: 'images/high_water.jpg',
+);
+var normal = NormalWaterUsage(
+  id: '1001',
+  type: 'normal',
+  tip: TipData.WATER_TIP,
+  subTitle: 'Use water efficiently',
+  image: 'images/high_water.jpg',
+);
+var high = HighWaterUsage(
+  id: '1002',
+  type: 'high water',
+  tip: TipData.WATER_TIP,
+  subTitle: 'Use water efficiently',
+  image: 'images/high_water.jpg',
+);
+
+var energy = EnergyConsumption(
+  id: '1003',
+  tip: TipData.ENERGY_TIP,
+  type: 'energy',
+  subTitle: 'Use Energy efficiently',
+  image: 'images/energy.jpg',
+);
 
 class UtilitiesScreen extends StatefulWidget {
   static const String HEATING_VALUE = 'HEATING';
@@ -66,6 +99,7 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
                               _questionOneValue;
                           saveData(UtilitiesScreen.HEATING_VALUE, res);
                         });
+                        _userEnergyChoice();
                       },
                     )),
                 QuestionCard(
@@ -81,6 +115,7 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
                             _questionTwoValue;
                         saveData(UtilitiesScreen.ELECTRICITY_VALUE, res);
                       });
+                      _userEnergyChoice();
                     },
                   ),
                 ),
@@ -90,7 +125,7 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
                   children: [
                     Text(utilities.questions[2]),
                     OptionsButton(
-                      onTap: _selectedChoice1,
+                      onTap: () => _selectedChoice1(context),
                       choice: 'Low e.g. less shower, less water usage',
                       userChoice: _userChoice1,
                     ),
@@ -100,7 +135,7 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
                       userChoice: _userChoice2,
                     ),
                     OptionsButton(
-                      onTap: _selectedChoice3,
+                      onTap: () => _selectedChoice3(context),
                       userChoice: _userChoice3,
                       choice:
                           'High e.g. long shower, car wash at home,\nkeeping tab water running  when not in use',
@@ -115,7 +150,7 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
     );
   }
 
-  void _selectedChoice1() {
+  void _selectedChoice1(context) {
     setState(() {
       _userChoice1 = !_userChoice1;
       _userChoice2 = false;
@@ -127,12 +162,20 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
           Utilities.WATER_EMISSION_FACTOR;
       saveData(UtilitiesScreen.LOW_WATER_USAGE, res);
       saveData(UtilitiesScreen.LOW, _userChoice1);
+      if (!tips.contains(low.id)) {
+        tips.add(low);
+        low.setUserSelection(true);
+      } else {
+        low.setUserSelection(true);
+      }
     }
     if (_userChoice2 == false || _userChoice3 == false) {
       _removeData(UtilitiesScreen.HIGH);
       _removeData(UtilitiesScreen.NORMAL);
       _removeData(UtilitiesScreen.HIGH_WATER_USAGE);
       _removeData(UtilitiesScreen.NORMAL_WATER_USAGE);
+      high.setUserSelection(false);
+      normal.setUserSelection(false);
     }
   }
 
@@ -149,32 +192,48 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
           Utilities.WATER_EMISSION_FACTOR;
       saveData(UtilitiesScreen.NORMAL_WATER_USAGE, res);
       saveData(UtilitiesScreen.NORMAL, _userChoice2);
+      if (!tips.contains(normal.id)) {
+        tips.add(normal);
+        normal.setUserSelection(true);
+      } else {
+        normal.setUserSelection(true);
+      }
     }
     if (_userChoice1 == false || _userChoice3 == false) {
       _removeData(UtilitiesScreen.LOW);
       _removeData(UtilitiesScreen.HIGH);
       _removeData(UtilitiesScreen.HIGH_WATER_USAGE);
       _removeData(UtilitiesScreen.LOW_WATER_USAGE);
+      low.setUserSelection(false);
     }
   }
 
-  void _selectedChoice3() {
+  void _selectedChoice3(context) {
     setState(() {
       _userChoice3 = !_userChoice3;
       _userChoice1 = false;
       _userChoice2 = false;
     });
-    if (_userChoice1) {
+    if (_userChoice3) {
       var res =
           Utilities.HIGH_WATER_USAGE * 30 * Utilities.WATER_EMISSION_FACTOR;
       saveData(UtilitiesScreen.HIGH_WATER_USAGE, res);
       saveData(UtilitiesScreen.HIGH, _userChoice3);
+      if (!tips.contains(high.id)) {
+        tips.add(high);
+        high.setUserSelection(true);
+      } else {
+        high.setUserSelection(true);
+      }
+      print('selecedt high water\n');
     }
     if (_userChoice1 == false || _userChoice2 == false) {
       _removeData(UtilitiesScreen.LOW);
       _removeData(UtilitiesScreen.NORMAL);
       _removeData(UtilitiesScreen.LOW_WATER_USAGE);
       _removeData(UtilitiesScreen.NORMAL_WATER_USAGE);
+      low.setUserSelection(false);
+      normal.setUserSelection(false);
     }
   }
 
@@ -184,6 +243,7 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
       _questionOneValue = value;
       res = Utilities.HEATING_EMISSION_FACTOR * _questionOneValue;
     });
+    _userEnergyChoice();
     saveData(UtilitiesScreen.HEATING_VALUE, res);
   }
 
@@ -193,11 +253,26 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
       _questionTwoValue = value;
       res = Utilities.ELECTRICITY_EMISSION_FACTOR * _questionTwoValue;
     });
+    _userEnergyChoice();
     saveData(UtilitiesScreen.ELECTRICITY_VALUE, res);
   }
 
   void _removeData(key) {
     removeLocalData(key);
+  }
+
+  void _userEnergyChoice() {
+    if (_questionOneValue != 0 || _questionTwoValue != 0) {
+      if (!tips.contains(energy.id)) {
+        tips.add(energy);
+        print('energy saved');
+        energy.setUserSelection(true);
+      } else {
+        energy.setUserSelection(true);
+      }
+    } else {
+      energy.setUserSelection(false);
+    }
   }
 
   void removedSavedData() {
@@ -209,5 +284,9 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
     _removeData(UtilitiesScreen.NORMAL);
     removeLocalData(UtilitiesScreen.HEATING_VALUE);
     _removeData(UtilitiesScreen.ELECTRICITY_VALUE);
+    energy.setUserSelection(false);
+    high.setUserSelection(false);
+    low.setUserSelection(false);
+    normal.setUserSelection(false);
   }
 }
