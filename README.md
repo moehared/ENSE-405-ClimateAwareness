@@ -39,9 +39,9 @@ If you want to try out the this app, first you have to create and configure a Fi
 * Clone the project:  https://github.com/moehared/ENSE-405-ClimateAwareness.git 
 * Create a new Firebase project from the console.
 * Configure the Firebase for each platform.
-* Run the app using the command:  cd app
+* go to the app directory :  cd app
 * make sure , you have configure the device you want to test the app (either ios simulator or android emulator)
-* then run following commond on terminal: flutter clean && flutter run
+* Run the app using the command on terminal: flutter clean && flutter run
 
 
 
