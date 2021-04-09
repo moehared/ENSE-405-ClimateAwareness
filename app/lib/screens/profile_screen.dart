@@ -1,7 +1,6 @@
 import 'dart:io' show File, Platform;
 
 import 'package:app/auth/auth_service.dart';
-import 'package:app/main.dart';
 import 'package:app/model/personalize_tips.dart';
 import 'package:app/screens/personalized_view_all_screen.dart';
 import 'package:app/screens/questionaire_screen/questinaires_screen.dart';
@@ -42,12 +41,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  final newList = tips.where((element) {
-    if (element.userChoice == false) {
-      return false;
-    }
-    return true;
-  });
+  // final newList = tips.where((element) {
+  //   if (element.userChoice == false) {
+  //     return false;
+  //   }
+  //   return true;
+  // });
 
   loadImage() async {
     final imageString = await getLocalData(ProfileScreen.IMAGE_KEY) ?? null;
@@ -124,6 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         constraints: BoxConstraints.expand(
             width: double.infinity, height: media.size.height),
         decoration: BoxDecoration(
+          // color: Color(0xffc2185b).withAlpha(100),
           image: DecorationImage(
             image: AssetImage("images/space.png"),
             fit: BoxFit.cover,
@@ -179,6 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     itemBuilder: (ctx, index) {
                       // var data = tipData.elementAt(index).values.toList();
                       var data = tipData[index];
+                      // var data = tipData.elementAt(index);
                       // var data = newList.elementAt(index);
                       return ReusableCard(
                         // id: data.id,
@@ -216,7 +217,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showModalBottomSheet(
       context: context,
       elevation: 4,
-      builder: (_) => UserMenuPopUp(),
+      builder: (_) => UserMenuPopUp(
+        isEdit: false,
+      ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(32),

@@ -9,6 +9,7 @@ class QuestionCard extends StatelessWidget {
   final Function onChanged;
   final Widget button;
   final double max;
+  final Widget exampleActivities;
   final int step;
 
   QuestionCard({
@@ -18,6 +19,7 @@ class QuestionCard extends StatelessWidget {
     @required this.button,
     this.step,
     this.max,
+    this.exampleActivities,
   });
 
   @override
@@ -53,6 +55,12 @@ class QuestionCard extends StatelessWidget {
               step: step ?? 5,
               onChanged: onChanged,
               value: value,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 5.0),
+                child: exampleActivities ?? Container(),
+              ),
             ),
             Expanded(child: button),
           ],

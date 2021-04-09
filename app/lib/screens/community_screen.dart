@@ -1,3 +1,4 @@
+import 'package:app/screens/community_post.dart';
 import 'package:app/screens/filter_screen/all_screen.dart';
 import 'package:app/screens/filter_screen/article_screen.dart';
 import 'package:app/screens/filter_screen/media.dart';
@@ -40,11 +41,11 @@ class _CommunityScreenState extends State<CommunityScreen>
           title: Text('Community'),
           actions: [
             IconButton(
-                icon: Icon(
-                  Icons.add,
-                ),
-                onPressed: () {} //_addPost,
-                ),
+              icon: Icon(
+                Icons.add,
+              ),
+              onPressed: _addPost,
+            ),
           ],
         ),
         body: Container(
@@ -57,22 +58,18 @@ class _CommunityScreenState extends State<CommunityScreen>
             ),
           ),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            // mainAxisSize: MainAxisSize.min,
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 height: 30,
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColorLight,
-                  // borderRadius: BorderRadius.circular(
-                  //   10,
-                  // ),
                 ),
                 child: TabBar(
+                  physics: BouncingScrollPhysics(),
                   controller: _tabController,
                   indicator: BoxDecoration(
-                    // borderRadius: BorderRadius.circular(
-                    //   10.0,
-                    // ),
                     color: Theme.of(context).accentColor,
                   ),
                   tabs: [
@@ -84,6 +81,7 @@ class _CommunityScreenState extends State<CommunityScreen>
               ),
               Expanded(
                 child: TabBarView(
+                  physics: BouncingScrollPhysics(),
                   controller: _tabController,
                   children: [
                     AllScreen(),
@@ -91,7 +89,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                     MediaScreen(),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -106,8 +104,14 @@ class _CommunityScreenState extends State<CommunityScreen>
   //     'link': 'www.123test.com',
   //     'desc': 'this is a test'
   //   };
-  //   _firebase.collection(CommunityScreen.COMMUNITY_COLLECTION).add(data);
+
   //   // post.set(data);
   //   print('data saved');
   // }
+
+  List<String> empty = [];
+
+  void _addPost() {
+    Navigator.of(context).pushNamed(AddPostScreen.RouteName, arguments: empty);
+  }
 }

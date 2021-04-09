@@ -35,8 +35,9 @@ class ResultChart extends StatelessWidget {
                       child: Text(
                         '${res.toStringAsFixed(2)} tons\nC02 e/month',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                           fontWeight: FontWeight.w900,
+                          color: Colors.black,
                         ),
                       ),
                     ),

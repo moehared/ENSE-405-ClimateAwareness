@@ -1,33 +1,20 @@
+import 'package:app/widget/user_post_stream.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AllScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text('all screen'),
-      ),
+    print("Time now is :${Timestamp.now().toDate().toLocal()}\n");
+    return Column(
+      children: [
+        UserPostStream(
+          filterByArticle: false,
+          filterByMedia: false,
+        ),
+      ],
     );
   }
-}
 
-// List<Widget> getData() {
-//   List<Widget> item = [];
-//   newList.forEach((e) {
-//     if (e != null) {
-//       item.add(
-//         Column(
-//           children: [
-//             Text('Type: ${e.type}'),
-//             Text('User choice: ${e.userChoice}')
-//           ],
-//         ),
-//       );
-//     }
-//
-//     setState(() {
-//       data = item;
-//     });
-//   });
-//   return item;
-// }
+  // print('Youtube Video URL is valid? ' + (isValid ? 'yes' : 'no'));
+}

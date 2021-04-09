@@ -17,7 +17,7 @@ void main() async {
 
 DatabaseReference userRef =
     FirebaseDatabase.instance.reference().child('users');
-
+// global variable;
 Set<PersonalizedTip> tips = {};
 
 class MyApp extends StatelessWidget {
@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
         StreamProvider(
           create: (ctx) => ctx.read<AuthService>().authState,
         ),
+        // ChangeNotifierProvider<TipManager>(
+        //   create: (_) => TipManager(),
+        // ),
         ChangeNotifierProvider<PersonalizedTip>(
           create: (_) => HighWaterUsage(),
         ),

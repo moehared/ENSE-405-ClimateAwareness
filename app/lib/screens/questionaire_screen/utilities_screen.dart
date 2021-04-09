@@ -1,4 +1,3 @@
-import 'package:app/main.dart';
 import 'package:app/model/category.dart';
 import 'package:app/model/personalize_tips.dart';
 import 'package:app/personalize_data/data.dart';
@@ -8,6 +7,8 @@ import 'package:app/widget/quesion_card.dart';
 import 'package:app/widget/unknown_button.dart';
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
+
 var low = LowWaterUsage(
   id: '1000',
   type: 'low water',
@@ -15,6 +16,7 @@ var low = LowWaterUsage(
   subTitle: 'you doing good for using low water',
   image: 'images/high_water.jpg',
 );
+
 var normal = NormalWaterUsage(
   id: '1001',
   type: 'normal',
@@ -59,6 +61,8 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
   var _userChoice1 = false;
   var _userChoice2 = false;
   var _userChoice3 = false;
+  var heating = 0.0;
+  var electricity = 0.0;
 
   @override
   void initState() {
@@ -85,23 +89,30 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
               physics: BouncingScrollPhysics(),
               children: [
                 QuestionCard(
-                    max: 200,
-                    step: 10,
-                    question: utilities.questions[0],
-                    value: _questionOneValue,
-                    onChanged: updateQuestionOneVal,
-                    button: UnknowButton(
-                      onTap: () {
-                        setState(() {
-                          _removeData(UtilitiesScreen.HEATING_VALUE);
-                          _questionOneValue = 60;
-                          var res = Utilities.HEATING_EMISSION_FACTOR *
-                              _questionOneValue;
-                          saveData(UtilitiesScreen.HEATING_VALUE, res);
-                        });
-                        _userEnergyChoice();
-                      },
-                    )),
+                  max: 200,
+                  step: 10,
+                  question: utilities.questions[0],
+                  value: _questionOneValue,
+                  onChanged: updateQuestionOneVal,
+                  button: UnknowButton(
+                    onTap: () {
+                      setState(() {
+                        _removeData(UtilitiesScreen.HEATING_VALUE);
+                        _questionOneValue = 60;
+                        var res = Utilities.HEATING_EMISSION_FACTOR *
+                            _questionOneValue;
+                        heating = res;
+                        saveData(UtilitiesScreen.HEATING_VALUE, res);
+                      });
+                      _userEnergyChoice();
+                    },
+                  ),
+                  exampleActivities: heating != 0
+                      ? Text(
+                          'example activities that can produce ${heating.toStringAsFixed(2)} Kg C02E could be  burning oil or gas for home heating. When the cost per month increases , you contribute more carbon footprint',
+                        )
+                      : Container(),
+                ),
                 QuestionCard(
                   question: utilities.questions[1],
                   value: _questionTwoValue,
@@ -113,11 +124,17 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
                         _questionTwoValue = 80;
                         var res = Utilities.ELECTRICITY_EMISSION_FACTOR *
                             _questionTwoValue;
+                        electricity = res;
                         saveData(UtilitiesScreen.ELECTRICITY_VALUE, res);
                       });
                       _userEnergyChoice();
                     },
                   ),
+                  exampleActivities: electricity != 0
+                      ? Text(
+                          'this is roughly what you can produce ${electricity.toStringAsFixed(2)} Kg C02E. When the cost per month increases , you contribute more carbon footprint',
+                        )
+                      : Container(),
                 ),
                 SizedBox(height: 20),
                 Column(
@@ -166,7 +183,7 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
         tips.add(low);
         low.setUserSelection(true);
       } else {
-        low.setUserSelection(true);
+        low.setUserSelection(false);
       }
     }
     if (_userChoice2 == false || _userChoice3 == false) {
@@ -196,7 +213,7 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
         tips.add(normal);
         normal.setUserSelection(true);
       } else {
-        normal.setUserSelection(true);
+        normal.setUserSelection(false);
       }
     }
     if (_userChoice1 == false || _userChoice3 == false) {
@@ -205,6 +222,7 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
       _removeData(UtilitiesScreen.HIGH_WATER_USAGE);
       _removeData(UtilitiesScreen.LOW_WATER_USAGE);
       low.setUserSelection(false);
+      high.setUserSelection(false);
     }
   }
 
@@ -223,9 +241,8 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
         tips.add(high);
         high.setUserSelection(true);
       } else {
-        high.setUserSelection(true);
+        high.setUserSelection(false);
       }
-      print('selecedt high water\n');
     }
     if (_userChoice1 == false || _userChoice2 == false) {
       _removeData(UtilitiesScreen.LOW);
@@ -242,6 +259,8 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
     setState(() {
       _questionOneValue = value;
       res = Utilities.HEATING_EMISSION_FACTOR * _questionOneValue;
+      heating = res;
+      print('heating = $heating\n');
     });
     _userEnergyChoice();
     saveData(UtilitiesScreen.HEATING_VALUE, res);
@@ -252,6 +271,7 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
     setState(() {
       _questionTwoValue = value;
       res = Utilities.ELECTRICITY_EMISSION_FACTOR * _questionTwoValue;
+      electricity = res;
     });
     _userEnergyChoice();
     saveData(UtilitiesScreen.ELECTRICITY_VALUE, res);
@@ -265,7 +285,7 @@ class _UtilitiesScreenState extends State<UtilitiesScreen> {
     if (_questionOneValue != 0 || _questionTwoValue != 0) {
       if (!tips.contains(energy.id)) {
         tips.add(energy);
-        print('energy saved');
+        // print('energy saved');
         energy.setUserSelection(true);
       } else {
         energy.setUserSelection(true);

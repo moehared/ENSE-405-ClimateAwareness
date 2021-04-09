@@ -31,22 +31,23 @@ class SliderWidget extends StatelessWidget {
         ),
       ),
       child: Slider(
-          value: value,
-          min: 0,
-          max: max,
-          divisions: step,
-          label: value == 200.00 && max != 500
-              ? '\$${value.toInt()}+'
-              : max == 20
-                  ? '${value.toInt()}\hr'
-                  : max == 16
-                      ? '${value.toInt()}'
-                      : step == 10
-                          ? '\$${value.toInt()}'
-                          : value == 5000.00
-                              ? '\$${value.toInt()}+'
-                              : '\$${value.toInt()}',
-          onChanged: onChanged),
+        value: value,
+        min: 0,
+        max: max,
+        divisions: step,
+        label: value == 200.00 && max != 500
+            ? '\$${value.toInt()}+'
+            : max == 20
+                ? '${value.toInt()}\hr'
+                : max == 16
+                    ? '${value.toInt()}'
+                    : step == 10
+                        ? '\$${value.toInt()}'
+                        : value == 5000.00
+                            ? '\$${value.toInt()}+'
+                            : '\$${value.toInt()}',
+        onChanged: onChanged,
+      ),
     );
   }
 }

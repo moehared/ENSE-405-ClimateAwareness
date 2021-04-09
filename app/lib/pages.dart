@@ -21,3 +21,5 @@ List<Map<String, Object>> pages = [
     'page': ProfileScreen(),
   },
 ];
+
+final dropDownList = ['select article type', 'article', 'media'];

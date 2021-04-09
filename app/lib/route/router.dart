@@ -1,8 +1,10 @@
 import 'package:app/auth/auth_wrapper.dart';
+import 'package:app/screens/community_post.dart';
 import 'package:app/screens/emailverification_screen.dart';
 import 'package:app/screens/login_screen.dart';
 import 'package:app/screens/personalized_details.dart';
 import 'package:app/screens/personalized_view_all_screen.dart';
+import 'package:app/screens/play_youtube_player.dart';
 import 'package:app/screens/questionaire_screen/questinaires_screen.dart';
 import 'package:app/screens/register_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,15 @@ class Router {
                 PersonalizedDetailsTips(settings.arguments as String));
       case PersonalizedViewAllScreen.PERSONALIZED_VIEW_ALL:
         return MaterialPageRoute(builder: (_) => PersonalizedViewAllScreen());
+      case AddPostScreen.RouteName:
+        return MaterialPageRoute(
+            builder: (_) => AddPostScreen(
+                  userEditPost: settings.arguments as List<String>,
+                ));
+      case PLayYoutubeVideo.routeName:
+        return MaterialPageRoute(
+            builder: (_) =>
+                PLayYoutubeVideo(settings.arguments as List<String>));
 
       default:
         return MaterialPageRoute(builder: (_) => AuthWrapper());

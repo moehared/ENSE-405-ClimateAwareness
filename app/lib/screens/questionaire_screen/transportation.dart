@@ -49,6 +49,8 @@ class _TransportationScreenState extends State<TransportationScreen> {
   var _userChoice2 = false;
   var _userChoice3 = false;
   var _userChoice4 = false;
+  var planeVal = 0.0;
+  var carVal = 0.0;
 
   @override
   void initState() {
@@ -81,6 +83,11 @@ class _TransportationScreenState extends State<TransportationScreen> {
                   value: _questionOneValue,
                   onChanged: updateQuestionOneVal,
                   button: Container(),
+                  exampleActivities: planeVal != 0
+                      ? Text(
+                          'you produce ${planeVal.toStringAsFixed(2)} Kg C02E .  For longer trip, you contribute more carbon footprint',
+                        )
+                      : Container(),
                 ),
                 QuestionCard(
                   max: 200,
@@ -89,6 +96,11 @@ class _TransportationScreenState extends State<TransportationScreen> {
                   value: _questionTwoValue,
                   onChanged: updateQuestionTwoVal,
                   button: Container(),
+                  exampleActivities: carVal != 0
+                      ? Text(
+                          'example activities that can produce ${carVal.toStringAsFixed(2)} Kg C02E could be burning more fuel by driving more. The longer you drive, the more carbon footprint you contribute',
+                        )
+                      : Container(),
                 ),
                 SizedBox(height: 20),
                 Column(
@@ -132,6 +144,7 @@ class _TransportationScreenState extends State<TransportationScreen> {
       print('selected value1 $_questionOneValue\n');
       res = Transportation.AVERAGE_PLANE_EMISSION * _questionOneValue * 1.1;
       print('res value1 $res\n');
+      planeVal = res;
       // transportation.setAirplaneValue(res);
       saveData(TransportationScreen.AIRPLANE_VALUE, res);
     });
@@ -154,6 +167,7 @@ class _TransportationScreenState extends State<TransportationScreen> {
       print('selected value2 $_questionTwoValue\n');
       res = Transportation.FUEL_EMISSION_FACTOR * _questionTwoValue;
       print('res value 2  $res\n');
+      carVal = res;
       saveData(TransportationScreen.FUEL_VALUE, res);
     });
     if (_questionTwoValue != 0.0) {

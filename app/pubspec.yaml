@@ -21,6 +21,9 @@ dependencies:
   shared_preferences: ^0.5.12+4
   provider: ^4.3.3
   email_validator: ^1.0.6
+  youtube_video_validator: ^1.1.0
+  youtube_player_flutter: ^7.0.0+7
+  uuid: 2.2.2
   image_picker: ^0.6.6+5
   focused_menu: ^1.0.0
   syncfusion_flutter_gauges: ^18.4.46
@@ -28,7 +31,7 @@ dependencies:
 # google_maps_flutter: ^1.2.0
 # geolocator: ^6.2.1
   http: ^0.12.2
-  intl: ^0.16.1
+#  intl: ^0.16.1
   rflutter_alert: ^1.1.0
 
 dev_dependencies:

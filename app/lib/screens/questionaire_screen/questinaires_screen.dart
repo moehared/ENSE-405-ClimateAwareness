@@ -1,18 +1,18 @@
-
 import 'dart:io';
 
 import 'package:app/main.dart';
 import 'package:app/model/personalize_tips.dart';
 import 'package:app/personalize_data/data.dart';
 import 'package:app/screens/profile_screen.dart';
-import 'package:app/screens/questionaire_screen/food_screen.dart';
-import 'package:app/screens/questionaire_screen/goods_services_screen.dart';
 import 'package:app/screens/questionaire_screen/transportation.dart';
 import 'package:app/screens/questionaire_screen/utilities_screen.dart';
 import 'package:app/screens/tabs.dart';
 import 'package:app/share_pref/local_data.dart';
 import 'package:app/widget/animated_widget.dart';
 import 'package:flutter/material.dart';
+
+import 'food_screen.dart';
+import 'goods_services_screen.dart';
 
 var foodSelection = FoodConsumption(
   id: '11000',
@@ -162,8 +162,6 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
     }
   }
 
-
-
   void nextQuestionScreen() {
     if (_selectedPage < pages.length - 1) {
       _selectedPage++;
@@ -174,7 +172,7 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
   }
 
   void _doneQuestions() async {
-     _saveUserChoice();
+    _saveUserChoice(context);
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (BuildContext context) => HomePage()),
@@ -210,10 +208,9 @@ class _QuestinairesScreenState extends State<QuestinairesScreen>
   }
 }
 
-void _saveUserChoice() async {
+void _saveUserChoice(context) async {
   var heating = await getLocalData(UtilitiesScreen.HEATING_VALUE) ?? 0;
-  var electricity =
-      await getLocalData(UtilitiesScreen.ELECTRICITY_VALUE) ?? 0;
+  var electricity = await getLocalData(UtilitiesScreen.ELECTRICITY_VALUE) ?? 0;
   var flight = await getLocalData(TransportationScreen.AIRPLANE_VALUE) ?? 0;
   var fuel = await getLocalData(TransportationScreen.FUEL_VALUE) ?? 0;
   var redMeat = await getLocalData(FoodScreen.RED_MEAT_VALUE) ?? 0;
@@ -221,8 +218,7 @@ void _saveUserChoice() async {
   var others = await getLocalData(FoodScreen.OTHER_SNACKS) ?? 0;
   var goods = await getLocalData(GoodsServicesScreen.GOODS) ?? 0;
   var fewEmails = await getLocalData(GoodsServicesScreen.FEW_DATA) ?? 0;
-  var streamRes =
-      await getLocalData(GoodsServicesScreen.MORE_STREAMING) ?? 0;
+  var streamRes = await getLocalData(GoodsServicesScreen.MORE_STREAMING) ?? 0;
   var option1 = await getLocalData(TransportationScreen.OPTION1) ?? 0;
   var option2 = await getLocalData(TransportationScreen.OPTION2) ?? 0;
   var option3 = await getLocalData(TransportationScreen.OPTION3) ?? 0;
@@ -230,8 +226,7 @@ void _saveUserChoice() async {
 
   var lowWater = await getLocalData(UtilitiesScreen.LOW_WATER_USAGE) ?? 0;
   var highWater = await getLocalData(UtilitiesScreen.HIGH_WATER_USAGE) ?? 0;
-  var normalWater =
-      await getLocalData(UtilitiesScreen.NORMAL_WATER_USAGE) ?? 0;
+  var normalWater = await getLocalData(UtilitiesScreen.NORMAL_WATER_USAGE) ?? 0;
 
   if (redMeat != 0 || whiteMeat != 0 || others != 0) {
     if (!tips.contains(foodSelection.id)) {
@@ -252,30 +247,34 @@ void _saveUserChoice() async {
   }
 
   var res = (heating +
-      electricity +
-      flight +
-      fuel +
-      redMeat +
-      option1 +
-      option2 +
-      option3 +
-      option4 +
-      whiteMeat +
-      others +
-      goods +
-      lowWater +
-      highWater +
-      normalWater +
-      fewEmails +
-      streamRes) /
+          electricity +
+          flight +
+          fuel +
+          redMeat +
+          option1 +
+          option2 +
+          option3 +
+          option4 +
+          whiteMeat +
+          others +
+          goods +
+          lowWater +
+          highWater +
+          normalWater +
+          fewEmails +
+          streamRes) /
       1000;
 
+  if (res == 0) {
+    removeLocalData(PersonalizedTip.TIPS_KEY);
+  }
   print(
       'heating = $heating\n electricty =  $electricity\n flight = $flight\n fuel = $fuel\n red_meat = $redMeat\n'
-          'white meat = $whiteMeat\n + others = $others\n few email = $fewEmails\n stream res = $streamRes\noption 1 = $option1\n'
-          'option2 = $option2\noption 3 = $option3\noption 4 = $option4\nlow water = $lowWater\nHigh water = $highWater\nnormal = $normalWater\n');
+      'white meat = $whiteMeat\n + others = $others\n few email = $fewEmails\n stream res = $streamRes\noption 1 = $option1\n'
+      'option2 = $option2\noption 3 = $option3\noption 4 = $option4\nlow water = $lowWater\nHigh water = $highWater\nnormal = $normalWater\n');
   print('res = ${res.toStringAsFixed(2)} ton C02e/month\n');
   saveData(QuestinairesScreen.RESULT, res);
+
   saveData(PersonalizedTip.TIPS_KEY, tips);
 }
 

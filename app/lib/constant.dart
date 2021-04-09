@@ -13,3 +13,6 @@ final kTextFieldform = InputDecoration(
     borderSide: BorderSide(color: Colors.white, width: 1),
   ),
 );
+
+const String ARTICLE = 'ARTICLE';
+const String MEDIA = 'MEDIA';

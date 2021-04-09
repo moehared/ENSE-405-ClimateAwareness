@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:app/main.dart';
 import 'package:app/model/personalize_tips.dart';
 import 'package:app/screens/profile_screen.dart';
 import 'package:app/screens/questionaire_screen/food_screen.dart';
@@ -9,6 +8,8 @@ import 'package:app/screens/questionaire_screen/questinaires_screen.dart';
 import 'package:app/screens/questionaire_screen/transportation.dart';
 import 'package:app/screens/questionaire_screen/utilities_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../main.dart';
 
 void saveData(String key, var data) async {
   final SharedPreferences pref = await SharedPreferences.getInstance();
