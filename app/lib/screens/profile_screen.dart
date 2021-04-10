@@ -88,6 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   _getTips() async {
     final res = await getLocalData(PersonalizedTip.TIPS_KEY) ?? null;
     if (res != null) {
+      print('retrieve res is $res\n');
       setState(() {
         tipData = res;
         // print('TIP data is $tipData\n');
@@ -178,7 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (ctx, index) {
                       // var data = tipData.elementAt(index).values.toList();
-                      var data = tipData[index];
+                      var data = tipData.elementAt(index);
                       // var data = tipData.elementAt(index);
                       // var data = newList.elementAt(index);
                       return ReusableCard(

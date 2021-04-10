@@ -21,6 +21,7 @@ void saveData(String key, var data) async {
   }
 
   if (data is Set<PersonalizedTip> && data != null) {
+    print('data is $data\n');
     pref.setString(key, json.encode(jsonEncodeTips()));
   }
 
@@ -81,9 +82,10 @@ Future getLocalData(String key) async {
   }
 }
 
-Future<void> removeLocalData(String key) async {
+Future<bool> removeLocalData(String key) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.remove(key);
+  final isDeleted = prefs.remove(key);
+  return isDeleted;
 }
 
 List<Map<String, dynamic>> jsonEncodeTips() {

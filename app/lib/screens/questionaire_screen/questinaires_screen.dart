@@ -266,7 +266,12 @@ void _saveUserChoice(context) async {
       1000;
 
   if (res == 0) {
-    removeLocalData(PersonalizedTip.TIPS_KEY);
+    print('result is null. user did not make selection\n');
+    final remove = await removeLocalData(PersonalizedTip.TIPS_KEY);
+    await removeLocalData(QuestinairesScreen.RESULT);
+    final data = await getLocalData(PersonalizedTip.TIPS_KEY) ?? null;
+    print('isDeleted value is $remove\n');
+    print('data value is $data\n');
   }
   print(
       'heating = $heating\n electricty =  $electricity\n flight = $flight\n fuel = $fuel\n red_meat = $redMeat\n'
