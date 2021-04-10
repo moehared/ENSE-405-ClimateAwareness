@@ -43,21 +43,22 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.home_filled),
               label: 'Home',
             ),
-            BottomNavigationBarItem(
-              backgroundColor: Theme.of(context).primaryColor,
-              icon: Icon(Icons.chat),
-              label: 'Chat',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor: Theme.of(context).primaryColor,
-              icon: Icon(Icons.location_on),
-              label: 'Near by',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor: Theme.of(context).primaryColor,
-              icon: Icon(Icons.forum_outlined),
-              label: 'Forum post',
-            ),
+            // commented out for future MVPs
+            // BottomNavigationBarItem(
+            //   backgroundColor: Theme.of(context).primaryColor,
+            //   icon: Icon(Icons.chat),
+            //   label: 'Chat',
+            // ),
+            // BottomNavigationBarItem(
+            //   backgroundColor: Theme.of(context).primaryColor,
+            //   icon: Icon(Icons.location_on),
+            //   label: 'Near by',
+            // ),
+            // BottomNavigationBarItem(
+            //   backgroundColor: Theme.of(context).primaryColor,
+            //   icon: Icon(Icons.forum_outlined),
+            //   label: 'Forum post',
+            // ),
             BottomNavigationBarItem(
               backgroundColor: Theme.of(context).primaryColor,
               icon: Icon(Icons.person),
