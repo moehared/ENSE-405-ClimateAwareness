@@ -30,6 +30,9 @@ this application is intened with the hope of reducing carbon footprint to suppor
 * [MVP 1 check in ](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/MVP/MVP_1.pdf)
 * [MVP Vlog 1](https://youtu.be/cDAUllsCo-A)
 * [MVP 2 check in](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/MVP/MVP%202%20check%20in.pdf)
+* [final project presentation](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/MVP/final%20405%20project.pdf)
+* [project report](https://github.com/moehared/ENSE-405-ClimateAwareness/blob/main/MVP/ENSE%20405%20Project%20report%20%26%20lessons%20learned.pdf)
+
 
 
 
@@ -42,6 +45,13 @@ If you want to try out the this app, first you have to create and configure a Fi
 * go to the app directory :  cd app
 * make sure , you have configure the device you want to test the app (either ios simulator or android emulator)
 * Run the app using the command on terminal: flutter clean && flutter run
+
+## Screenshots 
+![sc1](https://user-images.githubusercontent.com/46978582/114636910-6096a180-9c85-11eb-9688-da20e8da64f6.png)
+
+
+
+
 
 
 
